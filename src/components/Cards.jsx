@@ -1,20 +1,19 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function makeCard(data) {
-  if(!data ||!data.length)
-    return(<div>No Shows Available</div>)
+function makeCard(data, navigate) {
+  if (!data || !data.length) return <div>No Shows Available</div>;
   data = data.map((d) => {
-    // console.log(d);
     return (
       <div
+        key={d.title}
         className="flex flex-col outline-none border-2 w-1/5"
         onClick={() => {
-          console.log(d.episodes);
+          navigate(`/episodes/${d.title}`);
         }}
       >
         <img
-          // style={{ height: '100px', width: 50 }}
           className="rounded-md ml-4 h-full"
           alt="name of the show"
           src={d.poster}
@@ -27,11 +26,8 @@ function makeCard(data) {
 }
 
 export default function AnimeCard({ data }) {
+  const navigate = useNavigate();
   if (!data) return <></>;
-  const ShowCards = makeCard(data.data);
-  return (
-    <div  className="flex flex-wrap ">
-      {ShowCards}
-    </div>
-  );
+  const ShowCards = makeCard(data.data, navigate);
+  return <div className="flex flex-wrap ">{ShowCards}</div>;
 }

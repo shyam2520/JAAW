@@ -1,26 +1,24 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Routes } from "react-router-dom";
 import AnimeCard from "./Cards";
+import { NavBar } from "./NavBar";
 
 const baseurl = "https://jaaw-api.herokuapp.com/anime?name=";
 
 async function getAnimeData(animeData, setanimeData) {
   if (animeData.name) {
-    try{
-
+    try {
       let response = await axios.get(baseurl + animeData.name);
-    //   console.log(data)
-    setanimeData({ ...animeData, data: response.data });
+      //   console.log(data)
+      setanimeData({ ...animeData, data: response.data });
+    } catch (error) {
+      console.log(error);
+      setanimeData({ ...animeData, data: {} });
     }
-    catch(error){
-      console.log(error)
-      setanimeData({...animeData,data:{}})
-    }
-    
   }
 }
 
-// impor tailwindcss
 export default function SearchBar() {
   const [animeData, setanimeData] = useState({});
   return (
@@ -29,9 +27,11 @@ export default function SearchBar() {
         <input
           type="text"
           className="bg-gray-400  mt-4 outline-none rounded-md border-2  border-blue-200 "
+          onKeyPress={(event) => {
+            if (event.key === "Enter") getAnimeData(animeData, setanimeData);
+          }}
           onInput={(event) => {
             setanimeData({ ...animeData, name: event.target.value });
-            // console.log(name);
           }}
         />
         <button
@@ -41,7 +41,7 @@ export default function SearchBar() {
           Search
         </button>
       </div>
-      <div className="border-2 border-red-400 ">
+      <div>
         <AnimeCard data={animeData.data} />
       </div>
     </div>
