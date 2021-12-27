@@ -1,4 +1,5 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
@@ -26,7 +27,7 @@ function SearchBarIcon({ searchUpdate }) {
 
 function NavSearch() {
   return (
-    <div >
+    <div>
       <input
         type={"text"}
         placeholder={"Search ..."}
@@ -38,13 +39,14 @@ function NavSearch() {
 
 export function NavBar() {
   const [isSearch, setIsSearch] = useState(false);
+  // const navigate = useNavigate();
   return (
     <nav className="bg-black">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between">
-          <div class="py-5">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-between">
+          <div className="py-5">
             <img
-              src="https://steamq.herokuapp.com/images/logo.png"
+              src="https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.svg"
               width={"130px"}
               height={"120px"}
             />
@@ -52,7 +54,15 @@ export function NavBar() {
           <div className="text-white py-5 font-mono ">
             <ul className="flex space-x-20">
               <li className="hover:text-indigo-500 cursor-pointer "> HOME</li>
-              <li className="hover:text-indigo-500 cursor-pointer"> SEARCH</li>
+              <li
+                className="hover:text-indigo-500 cursor-pointer"
+                // onClick={() => {
+                //   navigate("/search");
+                // }}
+              >
+                {" "}
+                SEARCH
+              </li>
               <li className="hover:text-indigo-500 cursor-pointer"> ABOUT </li>
               {!isSearch ? (
                 <SearchBarIcon searchUpdate={setIsSearch} />

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Routes } from "react-router-dom";
 import AnimeCard from "./Cards";
+import searchAnime from "../Services/AnimeInfo";
 import { NavBar } from "./NavBar";
 
 const baseurl = "https://jaaw-api.herokuapp.com/anime?name=";
@@ -11,6 +12,7 @@ async function getAnimeData(animeData, setanimeData) {
     try {
       let response = await axios.get(baseurl + animeData.name);
       //   console.log(data)
+      searchAnime(animeData.name)
       setanimeData({ ...animeData, data: response.data });
     } catch (error) {
       console.log(error);

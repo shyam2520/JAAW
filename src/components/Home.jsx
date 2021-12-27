@@ -1,28 +1,50 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Carousel } from "react-responsive-carousel";
+import Carousel_Gen from "./Carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useQuery, gql } from "@apollo/client";
+
+const TRENDING_ANIME = gql`
+  query {
+    globalTrending(first: 4, last: 4, mediaType: ANIME) {
+      nodes {
+        titles {
+          canonical
+        }
+        bannerImage {
+          original {
+            url
+          }
+        }
+        description
+      }
+    }
+  }
+`;
+
+
+
 export function MainHome() {
-  const coursel_images = [
-    "https://media.kitsu.io/anime/cover_images/13569/large.jpg",
-    "https://media.kitsu.io/anime/cover_images/42765/large.jpg",
-    "https://media.kitsu.io/anime/cover_images/1376/large.jpg",
-  ];
+
+  const { data, loading, error } = useQuery(TRENDING_ANIME);
+  if (loading) return <div>LOADING ....</div>;
+
+  if (error) return <div>{error}</div>;
+
   return (
     <div>
-      <div className="relative">
-        <div style={{ height: "400px" }} className="whitespace-nowrap absolute">
-          {coursel_images.map((imgsrc, idx) => (
-            <div key={idx} className="inline-block ">
-              <img className="h-full w-full" src={imgsrc} />
-            </div>
-          ))}
-        </div>
-        <div className="absolute right-0 bottom-0">
-          {coursel_images.map((_, idx) => (
-            <div
-              key={idx}
-              className="h-2 w-8 rounded-lg bg-indigo-500 inline-block mx-2 "
-            ></div>
-          ))}
-        </div>
-      </div>
+      <Carousel
+        axist="horizontal"
+        autoPlay={true}
+        interval={2500}
+        infiniteLoop={true}
+        showThumbs={false}
+        showStatus={false}
+        transitionTime={1000}
+      >
+        {Carousel_Gen(data.globalTrending.nodes)}
+      </Carousel>
     </div>
   );
 }

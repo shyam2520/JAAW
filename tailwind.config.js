@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors:{
+      },
+      fontFamily:{
+        'Carousel-text':['Poppins', 'sans-serif'],
+        // 'Carousel-header':[]
+        
       }
     },
   },
