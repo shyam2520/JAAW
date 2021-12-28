@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function makeCard(data, navigate) {
+  console.log(data);
   if (!data || !data.length) return <div>No Shows Available</div>;
   data = data.map((d) => {
     return (
@@ -10,7 +11,8 @@ function makeCard(data, navigate) {
         key={d.title}
         className="flex flex-col outline-none border-2 w-1/5"
         onClick={() => {
-          navigate(`/episodes/${d.title}`);
+          if (d.id == null) d.id = "";
+          navigate(`/episodes/${d.title}/${d.id}`);
         }}
       >
         <img
@@ -27,7 +29,8 @@ function makeCard(data, navigate) {
 
 export default function AnimeCard({ data }) {
   const navigate = useNavigate();
-  if (!data) return <></>;
+  console.log(data);
+  if (!data || !data.data || !data.data.length) return <></>;
   const ShowCards = makeCard(data.data, navigate);
   return <div className="flex flex-wrap ">{ShowCards}</div>;
 }

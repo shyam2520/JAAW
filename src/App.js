@@ -17,7 +17,7 @@ function App() {
               <Route path={"/"} element={<MainHome />} />
               <Route path={`/search`} element={<SearchBar />} />
 
-              <Route path={`/episodes/:show`} element={<Episodes />} />
+              <Route path={`/episodes/:show/:id`} element={<Episodes />} />
             </Routes>
           </Router>
         </div>

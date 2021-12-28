@@ -1,18 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Routes } from "react-router-dom";
 import AnimeCard from "./Cards";
-import searchAnime from "../Services/AnimeInfo";
-import { NavBar } from "./NavBar";
-
-const baseurl = "https://jaaw-api.herokuapp.com/anime?name=";
+import {GetAnimeByName} from "../Services/getAnime"
 
 async function getAnimeData(animeData, setanimeData) {
   if (animeData.name) {
     try {
-      let response = await axios.get(baseurl + animeData.name);
-      //   console.log(data)
-      searchAnime(animeData.name)
+      let response = await GetAnimeByName(animeData.name);
+      // console.log(response.data);
       setanimeData({ ...animeData, data: response.data });
     } catch (error) {
       console.log(error);
@@ -44,7 +38,7 @@ export default function SearchBar() {
         </button>
       </div>
       <div>
-        <AnimeCard data={animeData.data} />
+        <AnimeCard data={animeData} />
       </div>
     </div>
   );
