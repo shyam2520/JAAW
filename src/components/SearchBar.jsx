@@ -1,45 +1,63 @@
-import React, { useState } from "react";
-import AnimeCard from "./Cards";
-import {GetAnimeByName} from "../Services/getAnime"
+import React, { useEffect, useState } from "react";
+import { GetAnimeByName } from "../Services/getAnime";
+import { useNavigate } from "react-router-dom";
+import { SuggestionList, suggestion_list } from "./Suggestion_list";
 
-async function getAnimeData(animeData, setanimeData) {
-  if (animeData.name) {
+async function getAnimeData(animeName, setanimeData) {
+  if (animeName) {
     try {
-      let response = await GetAnimeByName(animeData.name);
-      // console.log(response.data);
-      setanimeData({ ...animeData, data: response.data });
+      let response = await GetAnimeByName(animeName);
+      setanimeData({ data: response, isLoading: false });
     } catch (error) {
       console.log(error);
-      setanimeData({ ...animeData, data: {} });
+      setanimeData({ data: {}, isLoading: false });
     }
   }
 }
 
-export default function SearchBar() {
-  const [animeData, setanimeData] = useState({});
+function SearchBar() {
+  const [animeData, setanimeData] = useState({ isLoading: true });
+  const [animeName, setanimeName] = useState("");
+  let navigate = useNavigate();
+  console.log("load value", animeData.isLoading);
+  useEffect(() => {
+    setanimeData({ isLoading: true });
+    if (animeName.length >= 3) {
+      getAnimeData(animeName, setanimeData);
+      setanimeName(animeName);
+    } else {
+      setanimeName(animeName);
+      setanimeData({ data: {}, isLoading: false });
+    }
+  }, [animeName]);
   return (
     <div>
       <div className="flex justify-center">
-        <input
-          type="text"
-          className="bg-gray-400  mt-4 outline-none rounded-md border-2  border-blue-200 "
-          onKeyPress={(event) => {
-            if (event.key === "Enter") getAnimeData(animeData, setanimeData);
-          }}
-          onInput={(event) => {
-            setanimeData({ ...animeData, name: event.target.value });
-          }}
-        />
-        <button
-          className="rounded-md border-blue-200 bg-gray-200"
-          onClick={() => getAnimeData(animeData, setanimeData)}
-        >
-          Search
-        </button>
-      </div>
-      <div>
-        <AnimeCard data={animeData} />
+        <div className="flex flex-col w-80">
+          <div>
+            <input
+              type="text"
+              className="bg-gray-400 w-full px-2 outline-none rounded-full border-2  border-blue-200 "
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  setTimeout(() => navigate(`/results/${animeName}`), 500);
+                }
+              }}
+              onInput={(event) => {
+                setanimeName(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            {animeData.isLoading ? (
+              <div className="text-white">Loading...</div>
+            ) : (
+              <div>{animeData ? <SuggestionList animeData={{...animeData}} /> : ""}</div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+export { getAnimeData, SearchBar };

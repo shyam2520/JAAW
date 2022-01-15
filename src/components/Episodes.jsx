@@ -1,9 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetEpisode } from "../Services/getAnime";
-// const getEpisodeURL = "https://jaaw-api.herokuapp.com/episode?title=";
-
 async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
   let response = await GetEpisode(showname, showid);
   let episodes = response.data.map((f) => {
@@ -21,8 +18,8 @@ async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
     );
   });
   setEpisode({ isLoading: true, episodes: episodes });
-  let firstEpIdx = response.data.findIndex((f) => f.name == "1");
-  setcurrEpisode({ currEpisodeSRC: response.data[firstEpIdx]["url_player"] });
+  let firstEpIdx = response.data[0];
+  setcurrEpisode({ currEpisodeSRC: firstEpIdx["url_player"] });
 }
 
 export function Episodes() {

@@ -54,15 +54,7 @@ export function NavBar() {
           <div className="text-white py-5 font-mono ">
             <ul className="flex space-x-20">
               <li className="hover:text-indigo-500 cursor-pointer "> HOME</li>
-              <li
-                className="hover:text-indigo-500 cursor-pointer"
-                // onClick={() => {
-                //   navigate("/search");
-                // }}
-              >
-                {" "}
-                SEARCH
-              </li>
+              <li className="hover:text-indigo-500 cursor-pointer"> SEARCH</li>
               <li className="hover:text-indigo-500 cursor-pointer"> ABOUT </li>
               {!isSearch ? (
                 <SearchBarIcon searchUpdate={setIsSearch} />

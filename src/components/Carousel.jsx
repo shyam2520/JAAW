@@ -1,8 +1,8 @@
-export default function  Carousel_Gen(data) {
+export default function Carousel_Gen(data) {
   return data.map((data, idx) => {
     let desc = data.description.en;
     desc = desc.split(" ");
-    if (desc.length >= 45) desc = desc.slice(0, 45);
+    if (desc.length >= 35) desc = desc.slice(0, 35);
     desc = desc.join(" ");
     desc += "...";
     return (
