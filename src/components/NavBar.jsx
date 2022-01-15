@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 
 function SearchBarIcon({ searchUpdate }) {
   // console.log(searchUpdate)
@@ -44,23 +44,27 @@ export function NavBar() {
     <nav className="bg-black">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
-          <div className="py-5">
-            <img
-              src="https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.svg"
-              width={"130px"}
-              height={"120px"}
-            />
+          <div className="flex flex-row m-5">
+            <div className="m-2">
+              <img
+                src="https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.svg"
+                width={"130px"}
+                height={"120px"}
+              />
+            </div>
+            <SearchBar />
           </div>
+
           <div className="text-white py-5 font-mono ">
             <ul className="flex space-x-20">
               <li className="hover:text-indigo-500 cursor-pointer "> HOME</li>
               <li className="hover:text-indigo-500 cursor-pointer"> SEARCH</li>
               <li className="hover:text-indigo-500 cursor-pointer"> ABOUT </li>
-              {!isSearch ? (
+              {/* {!isSearch ? (
                 <SearchBarIcon searchUpdate={setIsSearch} />
               ) : (
                 <NavSearch />
-              )}
+              )} */}
             </ul>
           </div>
         </div>

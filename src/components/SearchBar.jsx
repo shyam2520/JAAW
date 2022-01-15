@@ -32,12 +32,12 @@ function SearchBar() {
   }, [animeName]);
   return (
     <div>
-      <div className="flex justify-center">
-        <div className="flex flex-col w-80">
+      <div className=" ml-3">
+        <div className="flex flex-col w-80 ">
           <div>
             <input
               type="text"
-              className="bg-gray-400 w-full px-2 outline-none rounded-full border-2  border-blue-200 "
+              className="bg-gray-500 w-full py-2 pl-4 outline-none rounded-full font-Carousel-text font-normal  text-white "
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   setTimeout(() => navigate(`/results/${animeName}`), 500);
@@ -52,7 +52,13 @@ function SearchBar() {
             {animeData.isLoading ? (
               <div className="text-white">Loading...</div>
             ) : (
-              <div>{animeData ? <SuggestionList animeData={{...animeData}} /> : ""}</div>
+              <div>
+                {animeData ? (
+                  <SuggestionList animeData={{ ...animeData }} />
+                ) : (
+                  ""
+                )}
+              </div>
             )}
           </div>
         </div>

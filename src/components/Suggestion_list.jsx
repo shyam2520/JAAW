@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const IMAGEPATH = "https://files.gogoanime123.com/";
-function SuggestionData({ data ,navigate}) {
-
+function SuggestionData({ data, navigate }) {
   return (
     <div
-      className="flex flex-row h-20 border-t-2 border-black   border-solid  hover:bg-indigo-700 group"
+      key={data.ID}
+      className="flex flex-row h-20 border-t-2 border-black   border-solid rounded-b-md  hover:bg-indigo-700 group"
       onClick={() => navigate(`/episodes/${data.post_title}/${data.ID}`)}
     >
       <div className="rounded-full flex-none w-2/12 overflow-hidden m-3  bg-black  ">
@@ -28,8 +28,8 @@ function SuggestionData({ data ,navigate}) {
   );
 }
 
-export function SuggestionList({animeData}) {
-    const navigate=useNavigate();
+export function SuggestionList({ animeData }) {
+  const navigate = useNavigate();
   if (!animeData || !animeData.data || !animeData.data.length) return <></>;
   else {
     animeData = animeData.data.sort((a, b) => (a.year < b.year ? 1 : -1));
@@ -41,7 +41,7 @@ export function SuggestionList({animeData}) {
           {animeData.map((show_data) => {
             return (
               <li>
-                <SuggestionData data={show_data} navigate={navigate}  />
+                <SuggestionData data={show_data} navigate={navigate} />
               </li>
             );
           })}

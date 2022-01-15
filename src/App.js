@@ -11,12 +11,13 @@ function App() {
   return (
     <ApolloProvider client={client}>
         <div className="bg-black h-full min-h-screen">
-        <NavBar />
+        {/* <NavBar /> */}
         <div>
           <Router>
             <Routes>
-              <Route path={"/"} element={<MainHome />} />
-              <Route path={`/search`} element={<SearchBar />} />
+            <Route path={"/"} element={<NavBar />} />
+              <Route path={"/Home"} element={<MainHome />} />
+              {/* <Route path={`/search`} element={<SearchBar />} /> */}
               <Route path={`/results/:animeName`} element={<SearchResults />} />
               <Route path={`/episodes/:show/:id`} element={<Episodes />} />
             </Routes>
