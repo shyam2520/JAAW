@@ -9,19 +9,20 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "apollo-link-context": "^1.0.20",
+    "autoprefixer": "^9.8.8",
     "axios": "^0.24.0",
+    "express-favicon": "^2.0.1",
     "graphql": "^15.8.0",
     "http-proxy-middleware": "^2.0.1",
+    "postcss": "^7.0.39",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "serve": "^13.0.2",
-    "web-vitals": "^1.0.1",
-    "autoprefixer": "^9.8.8",
-    "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "craco start",
@@ -29,7 +30,6 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",
