@@ -10,6 +10,7 @@ const Anime_Params = {
   action: "load_anime_list",
 };
 async function getanimeData(animeName, animeData, setanimeData) {
+  console.log('calling get anime')
   if (animeName) {
     try {
       let response = await GetAnimeByName(animeName, animeData.animeParams);
@@ -29,7 +30,7 @@ async function getanimeData(animeName, animeData, setanimeData) {
     }
   }
 }
-export function SearchResults() {
+export default function SearchResults() {
   const { animeName } = useParams();
   const [animeData, setanimeData] = useState({
     loading: true,

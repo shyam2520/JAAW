@@ -22,7 +22,7 @@ async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
   setcurrEpisode({ currEpisodeSRC: firstEpIdx["url_player"] });
 }
 
-export function Episodes() {
+export default function Episodes() {
   const [episode, setEpisode] = useState({ isLoading: false });
   const [currEpisode, setcurrEpisode] = useState({ currEpisodeSRC: "" });
   let { show, id } = useParams();

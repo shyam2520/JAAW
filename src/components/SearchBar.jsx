@@ -6,10 +6,10 @@ import { SuggestionList } from "./Suggestion_list";
 
 async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
-    console.log(animeName)
+    console.log(animeName);
     try {
       let response = await GetAnimeByName(animeName);
-      response=response["data"]
+      response = response["data"];
       response = response
         .sort((a, b) => (a.year < b.year ? 1 : -1))
         .slice(0, 5);
@@ -24,6 +24,7 @@ async function getAnimeData(animeName, setanimeData) {
 function SearchBar() {
   const [animeData, setanimeData] = useState({ isLoading: false });
   const [animeName, setanimeName] = useState("");
+  const [selectanime,setSelectAnime]=useState(0);
   let navigate = useNavigate();
   console.log("load value", animeData.isLoading);
   useEffect(() => {
@@ -70,8 +71,10 @@ function SearchBar() {
               onKeyDown={(event) => {
                 if (event.code === "ArrowDown") {
                   let newData = { ...animeData };
-                  newData.data[0].selected = true;
-                  setanimeData({ isLoading: false, data: newData.data });
+                  if (newData.data.length > 0) {
+                    // newData.data[%newData.data.length].selected = true;
+                    setanimeData({ isLoading: false, data: newData.data });
+                  }
                 }
               }}
               onKeyUp={(event) => {
