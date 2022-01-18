@@ -43,7 +43,7 @@ export function SearchResults() {
   console.log(animeData);
   if (animeData.loading) {
     getanimeData(animeName, animeData, setanimeData);
-    return <div className="text-white">Loading ...</div>;
+    return <div className="text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full">Loading ...</div>;
   }
   if (
     !animeData ||
