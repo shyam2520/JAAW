@@ -1,4 +1,4 @@
-import styles from "../../src/App.css";
+import  "../../src/App.css";
 function Loading() {
   return (
     <div className=" bg-gray-800 mt-2 h-32 rounded-md relative">

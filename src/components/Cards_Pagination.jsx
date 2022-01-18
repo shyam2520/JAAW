@@ -1,4 +1,4 @@
-import styles from "../../src/App.css";
+import "../../src/App.css";
 function paginator(params, setanimeData, increment) {
   let newparams = params;
   newparams["page"] += increment;
@@ -7,7 +7,7 @@ function paginator(params, setanimeData, increment) {
   delete newparams["setanimeData"];
   setanimeData({ loading: true, animeParams: newparams });
 }
-function Cards_Pagination({ params }) {
+function CardsPagination({ params }) {
   console.log(params);
   let setanimeData = params.setanimeData;
   return (
@@ -36,4 +36,4 @@ function Cards_Pagination({ params }) {
     </div>
   );
 }
-export { Cards_Pagination };
+export { CardsPagination };

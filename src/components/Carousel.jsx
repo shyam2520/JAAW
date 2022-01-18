@@ -7,7 +7,7 @@ export default function Carousel_Gen(data) {
     desc += "...";
     return (
       <div key={idx} className="relative" style={{ height: 400 }}>
-        <img src={data.bannerImage.original.url} className="h-full " />
+        <img src={data.bannerImage.original.url} alt ={data.titles.canonical} className="h-full " />
         <div className="h-full w-full absolute   top-0 bg-black opacity-40 "></div>
         <h1 className="absolute top-20 left-20 text-white font-bold  font-Carousel-text text-5xl">
           {data.titles.canonical}

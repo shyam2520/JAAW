@@ -3,7 +3,6 @@ import axios from "axios";
 const ANIMEAPIGOGO = axios.create({
   baseURL: "https://jaaw-api.herokuapp.com/",
 });
-const IMAGEPATH = "https://files.gogoanime123.com/";
 const Anime_Params={
   character:"",
   page:1,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetAnimeByName } from "../Services/getAnime";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./Loading";
-import { SuggestionList, suggestion_list } from "./Suggestion_list";
+import { SuggestionList } from "./Suggestion_list";
 
 async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
@@ -68,7 +68,7 @@ function SearchBar() {
                 }
               }}
               onKeyDown={(event) => {
-                if (event.code == "ArrowDown") {
+                if (event.code === "ArrowDown") {
                   let newData = { ...animeData };
                   newData.data[0].selected = true;
                   setanimeData({ isLoading: false, data: newData.data });
@@ -76,7 +76,7 @@ function SearchBar() {
               }}
               onKeyUp={(event) => {
                 let ele = document.getElementById("suggestions_list");
-                if (event.code == "Enter") {
+                if (event.code === "Enter") {
                   ele.style.display = "none";
                 } else ele.style.display = "block";
               }}

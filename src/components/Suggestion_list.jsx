@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../src/App.css";
+import "../../src/App.css";
 const IMAGEPATH = "https://files.gogoanime123.com/";
 
 function SuggestionData({ data, navigate }) {
@@ -16,7 +15,7 @@ function SuggestionData({ data, navigate }) {
       }
     >
       <div className="rounded-full flex-none w-2/12 overflow-hidden m-3  bg-black  ">
-        <img src={IMAGEPATH + data.image} className=" object-cover" />
+        <img src={IMAGEPATH + data.image} alt={data.image} className=" object-cover" />
       </div>
       <div className="truncate flex-1  m-3 ">
         <div className=" font-normal truncate font-Carousel-text text-gray-400  group-hover:text-white ">

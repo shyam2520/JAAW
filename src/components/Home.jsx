@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import Carousel_Gen from "./Carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";

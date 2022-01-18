@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetAnimeByName } from "../Services/getAnime";
 import AnimeCard from "./Cards";
-import { Cards_Pagination } from "./Cards_Pagination";
+import { CardsPagination } from "./Cards_Pagination";
 const Anime_Params = {
   character: "",
   page: 1,
@@ -48,8 +48,8 @@ export function SearchResults() {
   if (
     !animeData ||
     !animeData.data ||
-    animeData.data.length == 0 ||
-    animeData.data.data.length == 0
+    animeData.data.length === 0 ||
+    animeData.data.data.length === 0
   ) {
     return (
       <div className="text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full">
@@ -62,7 +62,7 @@ export function SearchResults() {
       <div className="mt-5">
         <AnimeCard data={{ name: animeName, data: animeData.data.data }} />
         {animeData.data.data.length >= 20 ? (
-          <Cards_Pagination
+          <CardsPagination
             params={{
               ...animeData.animeParams,
               total_page: animeData.data.total_page,
