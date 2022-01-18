@@ -14,7 +14,6 @@
     "axios": "^0.24.0",
     "graphql": "^15.8.0",
     "http-proxy-middleware": "^2.0.1",
-    "postcss": "^7.0.39",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive-carousel": "^3.2.22",
@@ -25,8 +24,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "node --max_old_space_size=2048 craco start",
-    "build": "node --max_old_space_size=2048 craco build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -47,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "postcss": "^8.4.5",
+    "postcss-focus": "^5.0.1"
   }
 }
