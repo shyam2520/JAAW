@@ -11,7 +11,6 @@
     "apollo-link-context": "^1.0.20",
     "autoprefixer": "^9.8.8",
     "axios": "^0.24.0",
-    "express-favicon": "^2.0.1",
     "graphql": "^15.8.0",
     "http-proxy-middleware": "^2.0.1",
     "postcss": "^7.0.39",
