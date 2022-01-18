@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'ep-bg':'#5c2d9c'
+        'ep-bg':'#5c2d9c',
+        'button-disabled':'#3c2464'
       },
       fontFamily:{
         'Carousel-text':['Poppins', 'sans-serif'],

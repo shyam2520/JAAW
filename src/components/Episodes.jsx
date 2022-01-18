@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetEpisode } from "../Services/getAnime";
 async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
@@ -26,14 +26,17 @@ export function Episodes() {
   const [episode, setEpisode] = useState({ isLoading: false });
   const [currEpisode, setcurrEpisode] = useState({ currEpisodeSRC: "" });
   let { show, id } = useParams();
+  useEffect(() => {
+    setEpisode({ isLoading:false });
+  }, [id]);
   if (!episode.isLoading) {
     getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div>Loading ...</div>;
   } else {
     return (
       <div>
-        <div>{show}</div>
-        <ul className="flex flex-wrap">{episode.episodes}</ul>
+        <div className="text-white">{show}</div>
+        <ul className="flex flex-wrap text-white">{episode.episodes}</ul>
         <br />
         <center>
           <iframe

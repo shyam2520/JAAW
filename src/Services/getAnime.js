@@ -4,20 +4,20 @@ const ANIMEAPIGOGO = axios.create({
   baseURL: "https://jaaw-api.herokuapp.com/",
 });
 const IMAGEPATH = "https://files.gogoanime123.com/";
+const Anime_Params={
+  character:"",
+  page:1,
+  limit:30,
+  action:'load_anime_list'
+}
 
-
-async function GetAnimeByName(animetitle) {
-  let anime_params={
-    character:animetitle,
-    page:1,
-    limit:100,
-    action:'load_anime_list'
-  }
+async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
+  anime_params['character']=animetitle
 
   let api_res = await ANIMEAPIGOGO.get("/anime", {
     params: anime_params,
   });
-  let res = api_res["data"]["data"]
+  let res = api_res["data"]
   // console.log(res)
   
   return res;

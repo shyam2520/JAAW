@@ -39,24 +39,27 @@ function NavSearch() {
 
 export function NavBar() {
   const [isSearch, setIsSearch] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <nav className="bg-black">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex flex-row m-5">
-            <div className="m-2">
+            <div className="m-2 cursor-pointer">
               <img
                 src="https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.svg"
                 width={"130px"}
                 height={"120px"}
+                onClick={()=>navigate('/')}
               />
             </div>
-            <SearchBar />
+            <div className="relative">
+              <SearchBar />
+            </div>
           </div>
 
-          <div className="text-white py-5 font-mono ">
-            <ul className="flex space-x-20">
+          <div className="text-white m-5 font-mono ">
+            <ul className="flex space-x-20 m-2 font-Carousel-text font-bold">
               <li className="hover:text-indigo-500 cursor-pointer "> HOME</li>
               <li className="hover:text-indigo-500 cursor-pointer"> SEARCH</li>
               <li className="hover:text-indigo-500 cursor-pointer"> ABOUT </li>

@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { GetAnimeByName } from "../Services/getAnime";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "./Loading";
 import { SuggestionList, suggestion_list } from "./Suggestion_list";
 
 async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
+    console.log(animeName)
     try {
       let response = await GetAnimeByName(animeName);
+      response=response["data"]
+      response = response
+        .sort((a, b) => (a.year < b.year ? 1 : -1))
+        .slice(0, 5);
       setanimeData({ data: response, isLoading: false });
     } catch (error) {
       console.log(error);
@@ -16,7 +22,7 @@ async function getAnimeData(animeName, setanimeData) {
 }
 
 function SearchBar() {
-  const [animeData, setanimeData] = useState({ isLoading: true });
+  const [animeData, setanimeData] = useState({ isLoading: false });
   const [animeName, setanimeName] = useState("");
   let navigate = useNavigate();
   console.log("load value", animeData.isLoading);
@@ -30,27 +36,61 @@ function SearchBar() {
       setanimeData({ data: {}, isLoading: false });
     }
   }, [animeName]);
+
+  const debounce = (func, delay) => {
+    let debounceTimer;
+    return function () {
+      const context = this;
+      const args = arguments;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+  const onHandleChange = (event) => {
+    console.log(event);
+    setanimeName(event.target.value);
+  };
+
+  const onOptimizedHandler = debounce(onHandleChange, 500);
+
   return (
-    <div>
+    <div className=" absolute z-30">
       <div className=" ml-3">
         <div className="flex flex-col w-80 ">
           <div>
             <input
               type="text"
+              text={animeName}
               className="bg-gray-500 w-full py-2 pl-4 outline-none rounded-full font-Carousel-text font-normal  text-white "
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
-                  setTimeout(() => navigate(`/results/${animeName}`), 500);
+                  navigate(`/results/${event.target.value}`, { replace: true });
                 }
               }}
-              onInput={(event) => {
-                setanimeName(event.target.value);
+              onKeyDown={(event) => {
+                if (event.code == "ArrowDown") {
+                  let newData = { ...animeData };
+                  newData.data[0].selected = true;
+                  setanimeData({ isLoading: false, data: newData.data });
+                }
               }}
+              onKeyUp={(event) => {
+                let ele = document.getElementById("suggestions_list");
+                if (event.code == "Enter") {
+                  ele.style.display = "none";
+                } else ele.style.display = "block";
+              }}
+              onBlur={(event) => {
+                setTimeout(() => {
+                  setanimeData({ data: {}, isLoading: false });
+                }, 100);
+              }}
+              onChange={onOptimizedHandler}
             />
           </div>
-          <div>
+          <div id="suggestions_list" style={{ display: "block" }}>
             {animeData.isLoading ? (
-              <div className="text-white">Loading...</div>
+              <Loading />
             ) : (
               <div>
                 {animeData ? (
