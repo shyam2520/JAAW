@@ -21,13 +21,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
     "start": "craco start",
     "build": "craco build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
-    },
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
   
   "eslintConfig": {
     "extends": [
