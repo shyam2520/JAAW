@@ -23,7 +23,7 @@ const TRENDING_ANIME = gql`
 
 
 
-export function MainHome() {
+export default function MainHome() {
 
   const { data, loading, error } = useQuery(TRENDING_ANIME);
   if (loading) return <div>LOADING ....</div>;

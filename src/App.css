@@ -18,7 +18,9 @@
 .total-page{
   @apply bg-ep-bg border-2 border-indigo-900 text-white h-8 w-8 font-Carousel-text text-center pt-1 
 }
-
+.loading{
+  @apply text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full
+}
 .animechangecolor {
     animation-name: changecolor;
     animation-iteration-count: infinite;

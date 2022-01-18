@@ -5,7 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./ApolloClient/Client";
 import { NavBar } from "./components/NavBar";
-import { MainHome } from "./components/Home";
+// import { MainHome } from "./components/Home";
+const  MainHome  = lazy(()=>import('./components/Home')) 
+  
+
 const SearchResults = lazy(() => import("./components/Search_Results"));
 const Episodes = lazy(() => import("./components/Episodes"));
 function App() {
@@ -15,44 +18,50 @@ function App() {
         <div>
           <Router>
             <Routes>
-              {/* <Route path={"/*"} element={<NavBar />} /> */}
               <Route
-                index
+                path={"/"}
                 element={
                   <div>
                     <NavBar />
+                    <Suspense fallback={<div className="loading">Loading ...</div>}>
                     <MainHome />
+                    </Suspense>
                   </div>
                 }
               />
               <Route
-                path={`results/:animeName`}
+                path={`/results/:animeName`}
                 element={
-                  <Suspense
-                    fallback={
-                      <div className="text-white text-lg">Loading ...</div>
-                    }
-                  >
-                    <div>
-                      <NavBar />
+                  <div>
+                    <NavBar />
+                    <Suspense
+                      fallback={
+                        <div className="loading">
+                          Loading ...
+                        </div>
+                      }
+                    >
+                      {" "}
                       <SearchResults />
-                    </div>
-                  </Suspense>
+                    </Suspense>
+                  </div>
                 }
               />
               <Route
                 path={`/episodes/:show/:id`}
                 element={
-                  <Suspense
-                    fallback={
-                      <div className="text-white text-lg">Loading ...</div>
-                    }
-                  >
-                    <div>
-                      <NavBar />
+                  <div>
+                    <NavBar />
+                    <Suspense
+                      fallback={
+                        <div className="loading">
+                          Loading ...
+                        </div>
+                      }
+                    >
                       <Episodes />
-                    </div>
-                  </Suspense>
+                    </Suspense>
+                  </div>
                 }
               />
             </Routes>
