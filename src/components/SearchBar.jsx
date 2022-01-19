@@ -24,7 +24,7 @@ async function getAnimeData(animeName, setanimeData) {
 function SearchBar() {
   const [animeData, setanimeData] = useState({ isLoading: false });
   const [animeName, setanimeName] = useState("");
-  const [selectanime,setSelectAnime]=useState(0);
+  // const [selectanime,setSelectAnime]=useState(0);
   let navigate = useNavigate();
   console.log("load value", animeData.isLoading);
   useEffect(() => {
@@ -48,7 +48,6 @@ function SearchBar() {
     };
   };
   const onHandleChange = (event) => {
-    console.log(event);
     setanimeName(event.target.value);
   };
 

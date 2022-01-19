@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Outlet } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 
 export function NavBar() {
   const navigate = useNavigate();
   return (
+    <div>
     <nav className="bg-black">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
@@ -32,5 +33,7 @@ export function NavBar() {
         </div>
       </div>
     </nav>
+    <Outlet />
+    </div>
   );
 }

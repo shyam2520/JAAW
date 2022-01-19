@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { GetAnimeByName } from "../Services/getAnime";
 import AnimeCard from "./Cards";
 import { CardsPagination } from "./Cards_Pagination";
+import "../../src/App.css"
 const Anime_Params = {
   character: "",
   page: 1,
@@ -44,7 +45,7 @@ export default function SearchResults() {
   console.log(animeData);
   if (animeData.loading) {
     getanimeData(animeName, animeData, setanimeData);
-    return <div className="text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full">Loading ...</div>;
+    return <div className="loading">Loading ...</div>;
   }
   if (
     !animeData ||
@@ -53,7 +54,7 @@ export default function SearchResults() {
     animeData.data.data.length === 0
   ) {
     return (
-      <div className="text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full">
+      <div className="loading">
         <div>No shows Available</div>
       </div>
     );
