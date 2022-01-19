@@ -21,6 +21,15 @@
 .loading{
   @apply text-white font-Carousel-text font-semibold flex w-3/4 pt-80 justify-center align-middle h-full
 }
+
+.suggested-title{
+  @apply font-normal truncate font-Carousel-text
+}
+
+.suggested-data-info{
+  @apply flex flex-row mt-1 font-Carousel-text font-light
+}
+
 .animechangecolor {
     animation-name: changecolor;
     animation-iteration-count: infinite;

@@ -7,9 +7,7 @@ function SuggestionData({ data, navigate }) {
   return (
     <div
       key={data.ID}
-      className={`dropdown-data ${
-        data.selected ? "bg-indigo-700" : ""
-      } hover:bg-indigo-700 group`}
+      className={`dropdown-data ${data.selected ? "bg-indigo-700" : ""} hover:bg-indigo-700 group`}
       onClick={() =>
         navigate(`/episodes/${data.post_title}/${data.ID}`, { replace: true })
       }
@@ -18,14 +16,14 @@ function SuggestionData({ data, navigate }) {
         <img src={IMAGEPATH + data.image} alt={data.image} className=" object-cover" />
       </div>
       <div className="truncate flex-1  m-3 ">
-        <div className=" font-normal truncate font-Carousel-text text-gray-400  group-hover:text-white ">
+        <div className={`suggested-title ${data.selected?"text-white":"text-gray-400"} group-hover:text-white`}>
           {data.post_title}
         </div>
-        <div className="flex flex-row mt-1  font-Carousel-text text-gray-500 font-light group-hover:text-white ">
+        <div className={`suggested-data-info ${data.selected?"text-white":"text-gray-500"} group-hover:text-white`}>
           <div className=" text-sm ">{data.year}</div>
-          <i className=" dropdown-dot  group-hover:bg-white"></i>
+          <i className={`dropdown-dot ${data.selected?"bg-white":"bg-gray-500"}   group-hover:bg-white`}></i>
           <div className="text-sm">{data.sub}</div>
-          <i className=" dropdown-dot group-hover:bg-white"></i>
+          <i className={`dropdown-dot ${data.selected?"bg-white":"bg-gray-500"} group-hover:bg-white`}></i>
           <div className="text-sm"> EP - {data.total_episode}</div>
         </div>
       </div>

@@ -6,7 +6,6 @@ import { SuggestionList } from "./Suggestion_list";
 
 async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
-    console.log(animeName);
     try {
       let response = await GetAnimeByName(animeName);
       response = response["data"];
@@ -24,11 +23,13 @@ async function getAnimeData(animeName, setanimeData) {
 function SearchBar() {
   const [animeData, setanimeData] = useState({ isLoading: false });
   const [animeName, setanimeName] = useState("");
-  // const [selectanime,setSelectAnime]=useState(0);
+  const [selectanime,setSelectAnime]=useState(-1);
   let navigate = useNavigate();
   console.log("load value", animeData.isLoading);
+  console.log("select value",selectanime)
   useEffect(() => {
     setanimeData({ isLoading: true });
+    setSelectAnime(-1);
     if (animeName.length >= 3) {
       getAnimeData(animeName, setanimeData);
       setanimeName(animeName);
@@ -38,6 +39,34 @@ function SearchBar() {
     }
   }, [animeName]);
 
+  function animeSelected(animeData,incrementor)
+  {
+    let newData = { ...animeData };
+    let newanime=selectanime+incrementor;
+    if(newanime<0) newanime=animeData.data.length-1;
+    if (newData.data && newData.data.length > 0) {
+      newData.data=newData.data.map( (show,idx) => {
+        if(idx===(newanime%(newData.data.length)))
+        {  show.selected=true;
+          return show; }
+        else 
+         { show.selected=false; return show ;}
+      });
+
+      setSelectAnime(newanime);
+      setanimeData({ isLoading: false, data: newData.data });
+   }
+  }
+
+  function navigator(event)
+  {
+    if(selectanime!==-1 && animeData.data&& animeData.data.length>0 )
+    { 
+      let show =animeData.data[selectanime%animeData.data.length];
+      navigate(`/episodes/${show.post_title}/${show.ID}`, { replace: true })
+    }
+    else navigate(`/results/${event.target.value}`, { replace: true });
+  }
   const debounce = (func, delay) => {
     let debounceTimer;
     return function () {
@@ -54,28 +83,17 @@ function SearchBar() {
   const onOptimizedHandler = debounce(onHandleChange, 500);
 
   return (
-    <div className=" absolute z-30">
-      <div className=" ml-3">
+      <div className=" ml-3 absolute z-30">
         <div className="flex flex-col w-80 ">
           <div>
             <input
               type="text"
-              text={animeName}
               className="bg-gray-500 w-full py-2 pl-4 outline-none rounded-full font-Carousel-text font-normal  text-white "
               onKeyPress={(event) => {
-                if (event.key === "Enter") {
-                  navigate(`/results/${event.target.value}`, { replace: true });
-                }
-              }}
-              onKeyDown={(event) => {
-                if (event.code === "ArrowDown") {
-                  let newData = { ...animeData };
-                  if (newData.data.length > 0) {
-                    // newData.data[%newData.data.length].selected = true;
-                    setanimeData({ isLoading: false, data: newData.data });
-                  }
-                }
-              }}
+                if (event.key === "Enter") {navigator(event)}}}
+              onKeyDown={(event) => {if (event.code === "ArrowDown") {animeSelected(animeData,1)}
+                 else if(event.code==="ArrowUp") {animeSelected(animeData,-1)}}
+              }
               onKeyUp={(event) => {
                 let ele = document.getElementById("suggestions_list");
                 if (event.code === "Enter") {
@@ -105,7 +123,7 @@ function SearchBar() {
           </div>
         </div>
       </div>
-    </div>
+
   );
 }
 export { getAnimeData, SearchBar };
