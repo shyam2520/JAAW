@@ -8,26 +8,24 @@ function makeCard(data, navigate) {
     return (
       <div
         key={d.post_title}
-        className="flex flex-col  bg-transparent  cursor-pointer group "
+        className="flex flex-col bg-transparent  cursor-pointer group "
         onClick={() => navigate(`/episodes/${d.post_title}/${d.ID}`)}
       >
-        <div className="relative w-full h-5/6 font-Carousel-text rounded-md">
+        <div className="relative w-full h-5/6 font-Carousel-text  rounded-md">
           <img
-            className="rounded-md h-full w-full z-0"
+            className="rounded-md h-full w-full z-0 object-fill"
             alt={d.image}
             src={IMAGEPATH + d.image}
           />
           <div className="absolute rounded-md top-0 left-0 w-full h-full z-10 group-hover:bg-black opacity-25 "></div>
           <div className="absolute  bottom-0 left-0 px-2 h-6 z-20 font-medium bg-ep-bg rounded-tr-lg rounded-bl-md  text-white ">
-            {" "}
             EP {d.total_episode_published} / {d.total_episode}
           </div>
           <div className="absolute  top-0 right-0 px-2 h-6 z-20 font-medium   bg-yellow-600 rounded-bl-lg rounded-tr-md  text-white">
-            {" "}
             {d.sub}
           </div>
         </div>
-        <div className=" font-Carousel-text truncate font-normal text-center text-gray-500 group-hover:text-white mt-2 ">
+        <div className="h-1/6 font-Carousel-text whitespace-normal overflow-hidden w-full font-normal text-center text-gray-500 group-hover:text-white mt-2 ">
           {d.post_title}
         </div>
       </div>
@@ -41,7 +39,7 @@ export default function AnimeCard({ data }) {
   if (!data || !data.data) return <></>;
   const ShowCards = makeCard(data.data, navigate);
   return (
-    <div className="grid grid-cols-5 gap-4 p-4">
+    <div className="grid grid-cols-5 gap-4 p-4 border-2 border-white" >
       {ShowCards}
     </div>
   );

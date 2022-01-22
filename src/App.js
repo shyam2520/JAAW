@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./ApolloClient/Client";
 import { NavBar } from "./components/NavBar";
+import { TopAnime } from "./components/TopAnime";
 // import { MainHome } from "./components/Home";
 const MainHome = lazy(() => import("./components/Home"));
 
@@ -34,7 +35,12 @@ function App() {
                     <Suspense
                       fallback={<div className="loading">Loading ...</div>}
                     >
-                      <SearchResults />
+                      <div className=" flex flex-row ">
+                        <div className=" w-8/12 mr-24  ">
+                          <SearchResults />
+                        </div>
+                        <div className="w-1/4"> <TopAnime /> </div>
+                      </div>
                     </Suspense>
                   }
                 />

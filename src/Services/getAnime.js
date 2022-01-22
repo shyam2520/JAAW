@@ -16,9 +16,7 @@ async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
   let api_res = await ANIMEAPIGOGO.get("/anime", {
     params: anime_params,
   });
-  let res = api_res["data"]
-  // console.log(res)
-  
+  let res = api_res["data"]  
   return res;
 }
 
@@ -32,11 +30,20 @@ async function GetEpisode(animetitle, anime_id) {
   let api_res = await ANIMEAPIGOGO.get("/episode", {
     params: episode_params,
   });
-  // console.log(api_res);
   return api_res.data;
 }
 
+async function GetTopEpisode(type)
+{
+  let top_anime_params={
+    action:'load_top_view_movie',
+    type:type
+  }
+  let api_res=await ANIMEAPIGOGO.get('/topanime',{params:top_anime_params});
+  return api_res;
+}
 export {
   GetAnimeByName,
   GetEpisode,
+  GetTopEpisode
 };

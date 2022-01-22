@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { GetAnimeByName } from "../Services/getAnime";
 import AnimeCard from "./Cards";
 import { CardsPagination } from "./Cards_Pagination";
-import "../../src/App.css"
+import { TopAnime } from "./TopAnime";
+import "../../src/App.css";
 const Anime_Params = {
   character: "",
   page: 1,
@@ -11,11 +12,10 @@ const Anime_Params = {
   action: "load_anime_list",
 };
 async function getanimeData(animeName, animeData, setanimeData) {
-  console.log('calling get anime')
   if (animeName) {
     try {
       let response = await GetAnimeByName(animeName, animeData.animeParams);
-
+      response.data=response.data.sort((a,b) => a.year<b.year?1:-1)
       setanimeData({
         data: response,
         loading: false,
@@ -47,12 +47,7 @@ export default function SearchResults() {
     getanimeData(animeName, animeData, setanimeData);
     return <div className="loading">Loading ...</div>;
   }
-  if (
-    !animeData ||
-    !animeData.data ||
-    animeData.data.length === 0 ||
-    animeData.data.data.length === 0
-  ) {
+  if (!animeData ||!animeData.data ||animeData.data.length === 0 ||animeData.data.data.length === 0) {
     return (
       <div className="loading">
         <div>No shows Available</div>
@@ -60,22 +55,20 @@ export default function SearchResults() {
     );
   }
   return (
-    <div className="flex flex-col w-3/4 m-4">
-      <div className="mt-5">
-        <AnimeCard data={{ name: animeName, data: animeData.data.data }} />
-        {animeData.data.data.length >= 20 ? (
-          <CardsPagination
-            params={{
-              ...animeData.animeParams,
-              total_page: animeData.data.total_page,
-              current_page: animeData.data.current_page,
-              setanimeData: setanimeData,
-            }}
-          />
-        ) : (
-          <></>
-        )}
+      <div className="flex flex-col w-full m-4">
+        <div className="mt-5">
+          <AnimeCard data={{ name: animeName, data: animeData.data.data }} />
+          {animeData.data.data.length >= 20 ? (
+            <CardsPagination
+              params={{
+                ...animeData.animeParams,
+                total_page: animeData.data.total_page,
+                current_page: animeData.data.current_page,
+                setanimeData: setanimeData,
+              }}
+            />) : (<></> )}
+        </div>
       </div>
-    </div>
+
   );
 }
