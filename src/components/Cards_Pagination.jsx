@@ -8,7 +8,6 @@ function paginator(params, setanimeData, increment) {
   setanimeData({ loading: true, animeParams: newparams });
 }
 function CardsPagination({ params }) {
-  console.log(params);
   let setanimeData = params.setanimeData;
   return (
     <div className="flex flex-row h-10 justify-center">

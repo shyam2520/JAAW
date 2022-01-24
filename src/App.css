@@ -11,6 +11,10 @@
     @apply  rounded-sm py-3 px-12 font-Carousel-text text-sm text-white 
 }
 
+.topanimemenu{
+  @apply pr-3 cursor-pointer hover:text-white
+}
+
 .current-page{
   @apply border-2 border-gray-500 text-gray-500 h-8 w-8 font-Carousel-text text-center pt-1
 }
