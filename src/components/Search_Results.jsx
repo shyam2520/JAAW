@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { GetAnimeByName } from "../Services/getAnime";
 import AnimeCard from "./Cards";
 import { CardsPagination } from "./Cards_Pagination";
-import { TopAnime } from "./TopAnime";
 import "../../src/App.css";
 const Anime_Params = {
   character: "",

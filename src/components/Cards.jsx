@@ -39,7 +39,7 @@ export default function AnimeCard({ data }) {
   if (!data || !data.data) return <></>;
   const ShowCards = makeCard(data.data, navigate);
   return (
-    <div className="grid grid-cols-5 gap-4 p-4 border-2 border-white" >
+    <div className="grid grid-cols-5 gap-4 p-4" >
       {ShowCards}
     </div>
   );

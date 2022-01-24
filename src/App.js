@@ -36,7 +36,7 @@ function App() {
                       fallback={<div className="loading">Loading ...</div>}
                     >
                       <div className=" flex flex-row ">
-                        <div className=" w-8/12 mr-24  ">
+                        <div className=" w-8/12 mx-10  ">
                           <SearchResults />
                         </div>
                         <div className="w-1/4"> <TopAnime /> </div>
