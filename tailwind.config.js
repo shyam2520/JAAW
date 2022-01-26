@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       colors:{
         'ep-bg':'#5c2d9c',
-        'button-disabled':'#3c2464'
+        'button-disabled':'#3c2464',
+        'ep-no-selected':'#303131',
+        'ep-text-no-selected':'#6A828E',
+        'ep-list':'#1C1C1C'
       },
       fontFamily:{
         'Carousel-text':['Poppins', 'sans-serif'],

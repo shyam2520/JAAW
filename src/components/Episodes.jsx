@@ -1,52 +1,98 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../../src/App.css";
 import { GetEpisode } from "../Services/getAnime";
 async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
   let response = await GetEpisode(showname, showid);
-  let episodes = response.data.map((f) => {
-    return (
-      <li>
-        <div
-          key={f["id"]}
-          style={{ cursor: "pointer" }}
-          className="bg-orange-600 border-4 border-black"
-          onClick={() => setcurrEpisode({ currEpisodeSRC: f["url_player"] })}
-        >
-          {f["name"]}
-        </div>
-      </li>
-    );
+  setEpisode({ isLoading: true, episodes: response.data });
+  let firstEp = response.data[0];
+  setcurrEpisode({
+    currEpisodeSRC: firstEp["url_player"],
+    episodename: firstEp["name"],
   });
-  setEpisode({ isLoading: true, episodes: episodes });
-  let firstEpIdx = response.data[0];
-  setcurrEpisode({ currEpisodeSRC: firstEpIdx["url_player"] });
+}
+
+function RenderEpisodes({ episodeData, currentEp }) {
+  return (
+    <div className="grid grid-cols-10 gap-y-2 gap-x-6">
+      {episodeData.episodes.map((episode) => {
+        return (
+          <li key={episode["id"]}>
+            <div
+              className={` ${
+                episode["name"] === currentEp["episodename"]
+                  ? "bg-ep-bg text-white"
+                  : " bg-ep-no-selected text-ep-text-no-selected"
+              }  font-Carousel-text cursor-pointer w-20 h-8  text-center pt-1 rounded-sm `}
+              onClick={() =>
+                currentEp.setcurrEpisode({
+                  currEpisodeSRC: episode["url_player"],
+                  episodename: episode["name"],
+                })
+              }
+            >
+              {episode["name"]}
+            </div>
+          </li>
+        );
+      })}
+    </div>
+  );
 }
 
 export default function Episodes() {
   const [episode, setEpisode] = useState({ isLoading: false });
-  const [currEpisode, setcurrEpisode] = useState({ currEpisodeSRC: "" });
+  const [currEpisode, setcurrEpisode] = useState({
+    currEpisodeSRC: "",
+    episodename: "",
+  });
   let { show, id } = useParams();
+  let navigate = useNavigate();
   useEffect(() => {
-    setEpisode({ isLoading:false });
+    setEpisode({ isLoading: false });
   }, [id]);
   if (!episode.isLoading) {
-    getEpisodes(show, id, setEpisode, setcurrEpisode);
-    return <div>Loading ...</div>;
+    getEpisodes(show, id, setEpisode, setcurrEpisode, currEpisode);
+    return <div className="loading">Loading ...</div>;
   } else {
     return (
-      <div>
-        <div className="text-white">{show}</div>
-        <ul className="flex flex-wrap text-white">{episode.episodes}</ul>
-        <br />
-        <center>
-          <iframe
-            title={currEpisode.currEpisodeSRC}
-            src={currEpisode.currEpisodeSRC}
-            height={"500px"}
-            width={"850px"}
-            scrolling="no"
-          />
-        </center>
+      <div className="p-5">
+        <div className="flex flex-row font-Carousel-text">
+          <div
+            className=" text-gray-500 hover:text-white cursor-pointer "
+            onClick={() => navigate("/", { replace: true })}
+          >
+            Home
+          </div>
+          <div className=" text-gray-500">&nbsp; &gt; &nbsp;</div>
+          <div className=" text-gray-400">{show}</div>
+        </div>
+
+        <div className=" my-10">
+          <center>
+            <iframe
+              title={currEpisode.currEpisodeSRC}
+              src={currEpisode.currEpisodeSRC}
+              height={"500px"}
+              // width={"850px"}
+              className='w-full'
+              scrolling="no"
+            />
+          </center>
+        </div>
+
+        <div>
+          
+            <div className=" bg-ep-list py-5 px-5 rounded-md">
+              <ul>
+              <RenderEpisodes
+                episodeData={{ ...episode }}
+                currentEp={{ ...currEpisode, setcurrEpisode: setcurrEpisode }}
+              />
+              </ul>
+            </div>
+        </div>
       </div>
     );
   }

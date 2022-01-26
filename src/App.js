@@ -50,7 +50,12 @@ function App() {
                     <Suspense
                       fallback={<div className="loading">Loading ...</div>}
                     >
-                      <Episodes />
+                      <div className=" flex flex-row ">
+                        <div className=" w-8/12 mx-10  ">
+                        <Episodes /> 
+                        </div>
+                        <div className="w-1/4"> <TopAnime /> </div>
+                      </div>
                     </Suspense>
                   }
                 />

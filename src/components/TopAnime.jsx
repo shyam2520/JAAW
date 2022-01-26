@@ -36,7 +36,7 @@ function RenderTopAnime({ data }) {
                   style={{ width: "356px" }}
                 >
                   <div className="flex flex-col  ">
-                    <div className="  px-2 text-base truncate font-Carousel-text  text-gray-200 group-hover:text-white">
+                    <div className="  px-2 text-base truncate font-Carousel-text  text-white group-hover:text-white">
                       {anime.post_title}
                     </div>
                     <div className="flex flex-row p-2">
@@ -149,7 +149,7 @@ function TopAnime() {
     return <div className="loading">Loading ...</div>;
   } else {
     return (
-      <div className=" px-5 pt-5 pb-2 bg-gray-800 rounded-md ">
+      <div className=" px-5 pt-5 pb-2 bg-ep-list rounded-md ">
         <TopAnimeMenu
           switchanimeData={{
             ...topanimeData,
