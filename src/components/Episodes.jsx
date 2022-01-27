@@ -2,15 +2,28 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../src/App.css";
-import { GetEpisode } from "../Services/getAnime";
-async function getEpisodes(showname, showid, setEpisode, setcurrEpisode) {
-  let response = await GetEpisode(showname, showid);
-  setEpisode({ isLoading: true, episodes: response.data });
-  let firstEp = response.data[0];
+import { GetEpisode, GetAnimeByName } from "../Services/getAnime";
+import {RangeEpisodes} from "./RangeEpisodes.jsx"
+
+async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_page=1) {
+  let response = await GetEpisode(showname, showid,current_page);
+  let animedata = await getAnimeDetail(showname, showid);
+  let restep = [...response.data];
+
+
+  setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
+    current_page:response.current_page,animeData: animedata});
+  let firstEp = restep[0];
   setcurrEpisode({
     currEpisodeSRC: firstEp["url_player"],
     episodename: firstEp["name"],
   });
+}
+
+async function getAnimeDetail(showname, id) {
+  let response = await GetAnimeByName(showname);
+  response = response.data.filter((data) => data.ID === id);
+  return response[0];
 }
 
 function RenderEpisodes({ episodeData, currentEp }) {
@@ -21,9 +34,7 @@ function RenderEpisodes({ episodeData, currentEp }) {
           <li key={episode["id"]}>
             <div
               className={` ${
-                episode["name"] === currentEp["episodename"]
-                  ? "bg-ep-bg text-white"
-                  : " bg-ep-no-selected text-ep-text-no-selected"
+                episode["name"] === currentEp["episodename"] ? "bg-ep-bg text-white": " bg-ep-no-selected text-ep-text-no-selected"
               }  font-Carousel-text cursor-pointer w-20 h-8  text-center pt-1 rounded-sm `}
               onClick={() =>
                 currentEp.setcurrEpisode({
@@ -41,19 +52,18 @@ function RenderEpisodes({ episodeData, currentEp }) {
   );
 }
 
+
+
 export default function Episodes() {
-  const [episode, setEpisode] = useState({ isLoading: false });
-  const [currEpisode, setcurrEpisode] = useState({
-    currEpisodeSRC: "",
-    episodename: "",
-  });
+  const [episode, setEpisode] = useState({ isLoading: true });
+  const [currEpisode, setcurrEpisode] = useState({currEpisodeSRC: "",episodename: ""});
   let { show, id } = useParams();
   let navigate = useNavigate();
   useEffect(() => {
-    setEpisode({ isLoading: false });
+    setEpisode({ isLoading: true });
   }, [id]);
-  if (!episode.isLoading) {
-    getEpisodes(show, id, setEpisode, setcurrEpisode, currEpisode);
+  if (episode.isLoading) {
+    getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div className="loading">Loading ...</div>;
   } else {
     return (
@@ -83,15 +93,17 @@ export default function Episodes() {
         </div>
 
         <div>
-          
-            <div className=" bg-ep-list py-5 px-5 rounded-md">
-              <ul>
+          <div className=" bg-ep-list py-5 px-5 rounded-md">
+          {episode.total_page>1?<div className=" mb-5">
+            <RangeEpisodes data={{ ...episode,setEpisode:setEpisode }} />
+          </div>:<></>}
+            <ul>
               <RenderEpisodes
                 episodeData={{ ...episode }}
                 currentEp={{ ...currEpisode, setcurrEpisode: setcurrEpisode }}
               />
-              </ul>
-            </div>
+            </ul>
+          </div>
         </div>
       </div>
     );

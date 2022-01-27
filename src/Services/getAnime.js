@@ -20,10 +20,11 @@ async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
   return res;
 }
 
-async function GetEpisode(animetitle, anime_id) {
+async function GetEpisode(animetitle, anime_id,page_val=1) {
+  console.log('page val = ',page_val)
   let episode_params={
     movie_id:anime_id,
-    page:1,
+    page:page_val,
     limit:100,
     action:'load_list_episode'
   }
