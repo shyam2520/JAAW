@@ -26,7 +26,7 @@ function RangeEpisodes({ data }) {
         low=(parseInt(data.total_page)-i) * 100;
         range_list.push(
           <div key={i} 
-          className={`cursor-pointer mr-3 font-Carousel-text ${data.current_page==i?'text-white':'text-ep-text-no-selected'} text-sm `}
+          className={`cursor-pointer mr-3 font-Carousel-text ${data.current_page===i?'text-white':'text-ep-text-no-selected'} text-sm `}
           onClick={()=>switchpage(data.animeData.post_title,data.animeData.ID,data.setEpisode,i)} >
             
             {`${low}-${data.animeData.total_episode_published}`}</div>
@@ -38,7 +38,7 @@ function RangeEpisodes({ data }) {
         high=low+100;
          range_list.push(
          <div key={i}
-        className={`cursor-pointer mr-3 font-Carousel-text ${data.current_page==i?'text-white':'text-ep-text-no-selected'} text-sm`}
+        className={`cursor-pointer mr-3 font-Carousel-text ${data.current_page===i?'text-white':'text-ep-text-no-selected'} text-sm`}
          onClick={()=>switchpage(data.animeData.post_title,data.animeData.ID,data.setEpisode,i)} >{`${low}-${high}`}</div>
          );
      ;}

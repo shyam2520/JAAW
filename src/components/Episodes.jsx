@@ -85,7 +85,6 @@ export default function Episodes() {
               title={currEpisode.currEpisodeSRC}
               src={currEpisode.currEpisodeSRC}
               height={"500px"}
-              // width={"850px"}
               className='w-full'
               scrolling="no"
             />
