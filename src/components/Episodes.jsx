@@ -5,6 +5,8 @@ import "../../src/App.css";
 import { GetEpisode, GetAnimeByName } from "../Services/getAnime";
 import {RangeEpisodes} from "./RangeEpisodes.jsx"
 
+const IMAGEPATH = "https://files.gogoanime123.com/";
+
 async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_page=1) {
   let response = await GetEpisode(showname, showid,current_page);
   let animedata = await getAnimeDetail(showname, showid);
@@ -66,6 +68,7 @@ export default function Episodes() {
     getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div className="loading">Loading ...</div>;
   } else {
+    console.log(episode.animeData)
     return (
       <div className="p-5">
         <div className="flex flex-row font-Carousel-text">
@@ -86,7 +89,7 @@ export default function Episodes() {
               src={currEpisode.currEpisodeSRC}
               height={"500px"}
               className='w-full'
-              scrolling="no"
+              scrolling="no" 
             />
           </center>
         </div>
@@ -104,6 +107,26 @@ export default function Episodes() {
             </ul>
           </div>
         </div>
+
+        <div className="rounded-md my-4 p-5 bg-ep-list">
+          <div className="flex flex-row">
+            <div className=" w-1/5 rounded-md  object-fill">
+              <img src={IMAGEPATH+episode.animeData.image} alt={episode.animeData.image} className="w-full h-full rounded-md"/>
+            </div>
+
+            <div className="flex flex-col w-3/4 pl-10 ">
+              <div>
+                <h1 className=" font-Carousel-text text-white font-medium text-xl">{episode.animeData.post_title}</h1>
+              </div>
+              <div className=" mt-5 text-sm text-ep-text-no-selected whitespace-normal font-Carousel-text text-justify">
+                {episode.animeData.post_content}
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
     );
   }
