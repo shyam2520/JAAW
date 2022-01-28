@@ -1,5 +1,6 @@
-export default function Carousel_Gen(data) {
+export default function Carousel_Gen(data,navigate) {
   return data.map((data, idx) => {
+    console.log(data.titles.canonical)
     let desc = data.description.en;
     desc = desc.split(" ");
     if (desc.length >= 35) desc = desc.slice(0, 35);
@@ -15,7 +16,7 @@ export default function Carousel_Gen(data) {
         <p className="text-white text-justify absolute top-36 left-20  w-1/3">
           {desc}
         </p>
-        <div className=" bg-indigo-600  absolute bottom-24 px-8 py-2 rounded-full left-20">
+        <div className=" bg-indigo-600  absolute bottom-24 px-8 py-2 rounded-full left-20 cursor-pointer" onClick={()=>navigate(`/results/${data.titles.canonical}` ,{replace:true})}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 inline-block mb-1 mr-1"

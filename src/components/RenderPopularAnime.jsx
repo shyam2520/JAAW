@@ -17,7 +17,7 @@ function RenderPopularAnime() {
   }
   else
   { 
-       if(!popAnime.data || popAnime.data.length==0 ) return <div className="loading">No Popular Shows Available</div>
+       if(!popAnime.data || popAnime.data.length===0 ) return <div className="loading">No Popular Shows Available</div>
        const AnimeCards=MakeCard(popAnime.data,navigate) 
       return( <div className="grid grid-cols-5 gap-4 w-full"> {AnimeCards}</div>);
   }

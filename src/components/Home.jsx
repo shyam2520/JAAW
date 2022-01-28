@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useQuery, gql } from "@apollo/client";
 import { RenderPopularAnime } from "./RenderPopularAnime";
 import { TopAnime } from "./TopAnime";
+import { useNavigate } from "react-router-dom";
 
 const TRENDING_ANIME = gql`
   query {
@@ -25,10 +26,13 @@ const TRENDING_ANIME = gql`
 
 export default function MainHome() {
   const { data, loading, error } = useQuery(TRENDING_ANIME);
-  if (loading) return <div>LOADING ....</div>;
+  let navigate=useNavigate();
+  if (loading) return <div className="loading">LOADING ....</div>;
 
   if (error) return <div>{error}</div>;
-
+  else
+  {
+  // data={...data,navigate:navigate};
   return (
     <div className=" flex flex-col">
       <div>
@@ -41,7 +45,7 @@ export default function MainHome() {
           showStatus={false}
           transitionTime={1000}
         >
-          {Carousel_Gen(data.globalTrending.nodes)}
+          {Carousel_Gen(data.globalTrending.nodes,navigate)}
         </Carousel>
       </div>
 
@@ -60,4 +64,5 @@ export default function MainHome() {
       </div>
     </div>
   );
+  }
 }
