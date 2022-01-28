@@ -99,7 +99,6 @@ function changeDuration(type, setDuration) {
 }
 
 function TopAnimeMenu({ switchanimeData }) {
-  console.log(switchanimeData);
   return (
     <div className="  flex justify-between  mb-4">
       <div className=" text-lg font-semibold text-white font-Carousel-text">

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const IMAGEPATH = "https://files.gogoanime123.com/";
-function makeCard(data, navigate) {
+ export function MakeCard(data, navigate) {
   if (!data || !data.length) return <div>No Shows Available</div>;
   let data_ele = data.map((d) => {
     return (
@@ -34,13 +34,15 @@ function makeCard(data, navigate) {
   return data_ele;
 }
 
-export default function AnimeCard({ data }) {
+function AnimeCard({ data }) {
   const navigate = useNavigate();
   if (!data || !data.data) return <></>;
-  const ShowCards = makeCard(data.data, navigate);
+  const ShowCards = MakeCard(data.data, navigate);
   return (
     <div className="grid grid-cols-5 gap-4 p-4" >
       {ShowCards}
     </div>
   );
 }
+
+export {AnimeCard}

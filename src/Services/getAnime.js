@@ -43,8 +43,20 @@ async function GetTopEpisode(type)
   let api_res=await ANIMEAPIGOGO.get('/topanime',{params:top_anime_params});
   return api_res;
 }
+
+async function GetPopularAnime(page=1,limit=25)
+{
+  let pop_anime_params={
+    action:'load_popular_ongoing_update',
+    limit:limit,
+    page:page
+  }
+  let api_res=await ANIMEAPIGOGO.get('/popular_on_going',{params:pop_anime_params});
+  return api_res;
+}
 export {
   GetAnimeByName,
   GetEpisode,
-  GetTopEpisode
+  GetTopEpisode,
+  GetPopularAnime
 };

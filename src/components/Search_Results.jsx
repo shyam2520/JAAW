@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GetAnimeByName } from "../Services/getAnime";
-import AnimeCard from "./Cards";
+import { AnimeCard } from "./Cards";
 import { CardsPagination } from "./Cards_Pagination";
 import "../../src/App.css";
 const Anime_Params = {
