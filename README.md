@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+## JAAW - JUST ANOTHER ANIME SITE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+JAAW is a full stack anime streaming website for variety of languages 
+
+Jaw is live on [heroku](https://jaaw-website.herokuapp.com/) and [netlify](https://project-jaaw.netlify.app/)
+
+#### FRONTEND
+- React JS
+- Tailwind CSS
+- Axios
+
+#### BACKEND 
+- Fast API
+- Node
+
+### To Run Locally 
 
 ## Available Scripts
 
