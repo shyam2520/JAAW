@@ -14,9 +14,9 @@ Jaw is live on [heroku](https://jaaw-website.herokuapp.com/) and [netlify](https
 - Node
 
 
-#### JAAW DEMO 
+<!-- #### JAAW DEMO 
 
-![JAAW DEMO](https://github.com/shyam2520/JAAW/blob/master/Video/2022-01-31-18-37-20.gif)
+![JAAW DEMO](https://github.com/shyam2520/JAAW/blob/master/Video/jaaw-demo.gif) -->
 
 
 
