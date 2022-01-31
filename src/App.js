@@ -8,7 +8,7 @@ import { NavBar } from "./components/NavBar";
 import { TopAnime } from "./components/TopAnime";
 // import { MainHome } from "./components/Home";
 const MainHome = lazy(() => import("./components/Home"));
-
+const About = lazy (()=> import('./components/About'))
 const SearchResults = lazy(() => import("./components/Search_Results"));
 const Episodes = lazy(() => import("./components/Episodes"));
 function App() {
@@ -56,6 +56,16 @@ function App() {
                         </div>
                         <div className="w-1/4"> <TopAnime /> </div>
                       </div>
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path={`About`}
+                  element={
+                    <Suspense
+                      fallback={<div className="loading">Loading ...</div>}
+                    >
+                      <div ><About /></div>
                     </Suspense>
                   }
                 />

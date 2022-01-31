@@ -25,8 +25,8 @@ export function NavBar() {
 
           <div className="text-white m-5 font-mono ">
             <ul className="flex space-x-20 m-2 font-Carousel-text font-bold">
-              <li className="hover:text-indigo-500 cursor-pointer "> HOME</li>
-              <li className="hover:text-indigo-500 cursor-pointer"> ABOUT </li>
+              <li className="hover:text-indigo-500 cursor-pointer " onClick={()=>navigate('/')}> HOME</li>
+              <li className="hover:text-indigo-500 cursor-pointer" onClick={()=>navigate('/About',{replace:true})}> ABOUT </li>
             </ul>
           </div>
         </div>
