@@ -1,6 +1,5 @@
 export default function Carousel_Gen(data,navigate) {
   return data.map((data, idx) => {
-    console.log(data.titles.canonical)
     let desc = data.description.en;
     desc = desc.split(" ");
     if (desc.length >= 35) desc = desc.slice(0, 35);

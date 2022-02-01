@@ -68,7 +68,6 @@ export default function Episodes() {
     getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div className="loading">Loading ...</div>;
   } else {
-    console.log(episode.animeData)
     return (
       <div className="p-5">
         <div className="flex flex-row font-Carousel-text">

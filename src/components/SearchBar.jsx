@@ -25,8 +25,6 @@ function SearchBar() {
   const [animeName, setanimeName] = useState("");
   const [selectanime,setSelectAnime]=useState(-1);
   let navigate = useNavigate();
-  console.log("load value", animeData.isLoading);
-  console.log("select value",selectanime)
   useEffect(() => {
     setanimeData({ isLoading: true });
     setSelectAnime(-1);

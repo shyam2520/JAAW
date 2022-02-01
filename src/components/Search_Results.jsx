@@ -37,11 +37,9 @@ export default function SearchResults() {
     animeParams: Anime_Params,
   });
   useEffect(() => {
-    console.log("SET STATE\n");
     setanimeData({ loading: true, animeParams: Anime_Params });
   }, [animeName]);
 
-  console.log(animeData);
   if (animeData.loading) {
     getanimeData(animeName, animeData, setanimeData);
     return <div className="loading">Loading ...</div>;
