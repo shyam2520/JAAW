@@ -1,4 +1,4 @@
-## JAAW - JUST ANOTHER ANIME WESITE
+## JAAW - JUST ANOTHER ANIME WEBSITE
 
 JAAW is a full stack anime streaming website for variety of languages 
 
