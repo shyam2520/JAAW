@@ -3,7 +3,6 @@ import "../../src/App.css";
 const IMAGEPATH = "https://files.gogoanime123.com/";
 
 function SuggestionData({ data, navigate }) {
-  console.log(data);
   return (
     <div
       key={data.ID}
