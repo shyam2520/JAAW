@@ -41,7 +41,7 @@ export default function About() {
       </div>
 
       <div className="pl-5 pt-14">
-        <a href="https://github.com/shyam2520/JAAW" target={"_blank"}>
+        <a href="https://github.com/shyam2520/JAAW"  rel="noreferrer"  target={"_blank"}>
           <div className="flex flex-row">
             <svg
               xmlns="http://www.w3.org/2000/svg"

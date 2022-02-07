@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../src/App.css";
-import { GetEpisode, GetAnimeByName } from "../Services/getAnime";
+import { GetEpisode } from "../Services/getAnime";
 import {RangeEpisodes} from "./RangeEpisodes.jsx"
 
 const IMAGEPATH = "https://files.gogoanime123.com/";
 
 async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_page=1) {
   let response = await GetEpisode(showname, showid,current_page);
-  let animedata = await getAnimeDetail(showname, showid);
+  // let animedata = await getAnimeDetail(showname, showid);
   let restep = [...response.data];
 
 
   setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
-    current_page:response.current_page,animeData: animedata});
+    current_page:response.current_page,
+    // animeData: animedata
+  });
   let firstEp = restep[0];
   setcurrEpisode({
     currEpisodeSRC: firstEp["url_player"],
@@ -22,11 +24,11 @@ async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_
   });
 }
 
-async function getAnimeDetail(showname, id) {
-  let response = await GetAnimeByName(showname);
-  response = response.data.filter((data) => data.ID === id);
-  return response[0];
-}
+// async function getAnimeDetail(showname, id) {
+//   let response = await GetAnimeByName(showname);
+//   response = response.data.filter((data) => data.ID === id);
+//   return response[0];
+// }
 
 function RenderEpisodes({ episodeData, currentEp }) {
   return (
@@ -60,6 +62,8 @@ export default function Episodes() {
   const [episode, setEpisode] = useState({ isLoading: true });
   const [currEpisode, setcurrEpisode] = useState({currEpisodeSRC: "",episodename: ""});
   let { show, id } = useParams();
+  const {state} =useLocation();
+  console.log('passing state',state)
   let navigate = useNavigate();
   useEffect(() => {
     setEpisode({ isLoading: true });
@@ -110,15 +114,15 @@ export default function Episodes() {
         <div className="rounded-md my-4 p-5 bg-ep-list">
           <div className="flex flex-row">
             <div className=" w-1/5 rounded-md  object-fill">
-              <img src={IMAGEPATH+episode.animeData.image} alt={episode.animeData.image} className="w-full h-full rounded-md"/>
+              <img src={IMAGEPATH+state.image} alt={state.image} className="w-full h-full rounded-md"/>
             </div>
 
             <div className="flex flex-col w-3/4 pl-10 ">
               <div>
-                <h1 className=" font-Carousel-text text-white font-medium text-xl">{episode.animeData.post_title}</h1>
+                <h1 className=" font-Carousel-text text-white font-medium text-xl">{state.post_title}</h1>
               </div>
               <div className=" mt-5 text-sm text-ep-text-no-selected whitespace-normal font-Carousel-text text-justify">
-                {episode.animeData.post_content}
+                {state.post_content}
               </div>
 
             </div>

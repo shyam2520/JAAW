@@ -96,8 +96,6 @@ function SearchBar() {
                 let ele = document.getElementById("suggestions_list");
                 if (event.code === "Enter") {
                   ele.style.display = "none";
-                  // event.target.value='';
-                  // setanimeData( {isLoading: false, data: {} })
                 } else ele.style.display = "block";
               }}
               onBlur={(event) => {

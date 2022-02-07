@@ -8,7 +8,7 @@ function SuggestionData({ data, navigate }) {
       key={data.ID}
       className={`dropdown-data ${data.selected ? "bg-indigo-700" : ""} hover:bg-indigo-700 group`}
       onClick={() =>
-        navigate(`/episodes/${data.post_title}/${data.ID}`, { replace: true })
+        navigate(`/episodes/${data.post_title}/${data.ID}`, { replace: true ,state:data})
       }
     >
       <div className="rounded-full flex-none w-2/12 overflow-hidden m-3  bg-black  ">

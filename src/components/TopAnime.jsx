@@ -19,10 +19,11 @@ function RenderTopAnime({ data }) {
           return (
             <li key={anime.post_title}> 
               <div
-                className={`relative h-40 w-full rounded-md mb-5 group`}
+                className={`relative h-40 w-full rounded-md mb-5 group cursor-pointer`}
                 onClick={() =>
                   navigate(`/episodes/${anime.post_title}/${anime.ID}`, {
                     replace: true,
+                    state:anime
                   })
                 }
               >

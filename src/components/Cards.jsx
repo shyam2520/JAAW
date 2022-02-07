@@ -9,7 +9,7 @@ const IMAGEPATH = "https://files.gogoanime123.com/";
       <div
         key={d.post_title}
         className="flex flex-col bg-transparent  cursor-pointer group "
-        onClick={() => navigate(`/episodes/${d.post_title}/${d.ID}`)}
+        onClick={() => navigate(`/episodes/${d.post_title}/${d.ID}`,{state:d})}
       >
         <div className="relative w-full h-5/6 font-Carousel-text  rounded-md">
           <img
@@ -39,7 +39,7 @@ function AnimeCard({ data }) {
   if (!data || !data.data) return <></>;
   const ShowCards = MakeCard(data.data, navigate);
   return (
-    <div className="grid grid-cols-5 gap-4 p-4" >
+    <div className="grid grid-cols-5 gap-4 p-4 " >
       {ShowCards}
     </div>
   );
