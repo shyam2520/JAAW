@@ -66,7 +66,7 @@ function RenderTopAnime({ data }) {
                       ></i>
 
                       <div className=" font-Carousel-text  text-gray-300 group-hover:text-white text-sm pl-2">
-                        {cat[0].name}
+                        {cat?cat[0].name:""}
                       </div>
                     </div>
                   </div>
