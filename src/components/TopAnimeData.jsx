@@ -33,7 +33,7 @@ function TopAnimeData({ data }) {
         ></i>
 
         <div className=" font-Carousel-text text-gray-500 group-hover:text-white text-sm pl-2">
-          {data.category[0].name}
+          {data.category?data.category[0].name:""}
         </div>
       </div>
     </div>
