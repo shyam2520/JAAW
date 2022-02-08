@@ -61,7 +61,7 @@ function SearchBar() {
     if(selectanime!==-1 && animeData.data&& animeData.data.length>0 )
     { 
       let show =animeData.data[selectanime%animeData.data.length];
-      navigate(`/episodes/${show.post_title}/${show.ID}`, { replace: true })
+      navigate(`/episodes/${show.post_title}/${show.ID}`, { replace: true,state:show })
     }
     else navigate(`/results/${event.target.value}`, { replace: true });
   }
