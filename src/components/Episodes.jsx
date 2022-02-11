@@ -62,8 +62,7 @@ export default function Episodes() {
   const [episode, setEpisode] = useState({ isLoading: true });
   const [currEpisode, setcurrEpisode] = useState({currEpisodeSRC: "",episodename: ""});
   let { show, id } = useParams();
-  const {state} =useLocation();
-  console.log('passing state',state)
+  const {state} =useLocation(); 
   let navigate = useNavigate();
   useEffect(() => {
     setEpisode({ isLoading: true });
