@@ -8,6 +8,7 @@ const IMAGEPATH = "https://files.gogoanime123.com/";
     return (
       <div
         key={d.post_title}
+        style={{'height':'350px'}}
         className="flex flex-col bg-transparent  cursor-pointer group "
         onClick={() => navigate(`/episodes/${d.post_title}/${d.ID}`,{state:d})}
       >
