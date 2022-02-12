@@ -2,7 +2,7 @@
 
 JAAW is a full stack anime streaming website for variety of languages 
 
-Jaw is live on [heroku](https://jaaw-website.herokuapp.com/) and [netlify](https://project-jaaw.netlify.app/)
+JAAW is live on [heroku](https://jaaw-website.herokuapp.com/) and [netlify](https://project-jaaw.netlify.app/)
 
 #### FRONTEND
 - React JS
