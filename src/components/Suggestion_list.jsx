@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../../src/App.css";
-const IMAGEPATH = "https://files.gogoanime123.com/";
+const IMAGEPATH = "https://statics.gogoanime.mom/";
 
 function SuggestionData({ data, navigate }) {
   return (

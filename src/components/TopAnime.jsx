@@ -3,13 +3,13 @@ import { GetTopEpisode } from "../Services/getAnime";
 import "../../src/App.css";
 import { TopAnimeData } from "./TopAnimeData";
 import { useNavigate } from "react-router-dom";
-const IMAGEPATH = "https://files.gogoanime123.com/";
+const IMAGEPATH = "https://statics.gogoanime.mom/";
 async function GetTopAnime(type, settopanimeData) {
   let res = await GetTopEpisode(type);
   settopanimeData({ isLoading: false, duration: type, data: res.data.data });
 }
 
-function RenderTopAnime({ data }) {
+function RenderTopAnime({data}) {
   let navigate = useNavigate();
   return (
     <ul>
