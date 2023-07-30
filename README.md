@@ -1,8 +1,7 @@
 ## JAAW - JUST ANOTHER ANIME WEBSITE
 
-JAAW is a full stack anime streaming website for variety of languages 
 
-JAAW is live on [heroku](https://jaaw-website.herokuapp.com/) and [netlify](https://project-jaaw.netlify.app/)
+JAAW is live on  [netlify](https://project-jaaw.netlify.app/)
 
 JAAW works better on netlify
 
