@@ -24,7 +24,7 @@ function TopAnimeData({ data }) {
           </svg>
         </div>
         <div className=" font-Carousel-text text-gray-500 group-hover:text-white text-sm pl-2">
-          {data.view_count}
+          {data.total_view}
         </div>
         <i
           className={
@@ -33,7 +33,7 @@ function TopAnimeData({ data }) {
         ></i>
 
         <div className=" font-Carousel-text text-gray-500 group-hover:text-white text-sm pl-2">
-          {data.category?data.category[0].name:""}
+          {data.type?data.type:""}
         </div>
       </div>
     </div>

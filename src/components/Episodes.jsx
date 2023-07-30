@@ -7,15 +7,13 @@ import {RangeEpisodes} from "./RangeEpisodes.jsx"
 
 const IMAGEPATH = "https://statics.gogoanime.mom/";
 
-async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_page=1) {
+async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_page=0) {
   let response = await GetEpisode(showname, showid,current_page);
   // let animedata = await getAnimeDetail(showname, showid);
-  let restep = [...response.data];
-
-
+  let restep = [...response.data.data];
+  console.log("get Episodes ",response)
   setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
     current_page:response.current_page,
-    // animeData: animedata
   });
   let firstEp = restep[0];
   setcurrEpisode({
@@ -34,20 +32,22 @@ function RenderEpisodes({ episodeData, currentEp }) {
   return (
     <div className="grid grid-cols-10 gap-y-2 gap-x-6">
       {episodeData.episodes.map((episode) => {
+        // console.log("episodes ",episode)
+        const ep_data = episode
         return (
-          <li key={episode["id"]}>
+          <li key={ep_data["id"]}>
             <div
               className={` ${
-                episode["name"] === currentEp["episodename"] ? "bg-ep-bg text-white": " bg-ep-no-selected text-ep-text-no-selected"
+                ep_data["name"] === currentEp["episodename"] ? "bg-ep-bg text-white": " bg-ep-no-selected text-ep-text-no-selected"
               }  font-Carousel-text cursor-pointer w-20 h-8  text-center pt-1 rounded-sm `}
               onClick={() =>
                 currentEp.setcurrEpisode({
-                  currEpisodeSRC: episode["url_player"],
-                  episodename: episode["name"],
+                  currEpisodeSRC: ep_data["url_player"],
+                  episodename: ep_data["name"],
                 })
               }
             >
-              {episode["name"]}
+              {ep_data["sort_order"]}
             </div>
           </li>
         );
@@ -71,6 +71,7 @@ export default function Episodes() {
     getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div className="loading">Loading ...</div>;
   } else {
+    console.log(currEpisode.currEpisodeSRC)
     return (
       <div className="p-5">
         <div className="flex flex-row font-Carousel-text">
@@ -114,7 +115,7 @@ export default function Episodes() {
         <div className="rounded-md my-4 p-5 bg-ep-list">
           <div className="flex flex-row">
             <div className=" w-1/5 rounded-md  object-fill">
-              <img src={IMAGEPATH+state.image} alt={state.image} className="w-full h-full rounded-md"/>
+              <img src={state.image} alt={state.image} className="w-full h-full rounded-md"/>
             </div>
 
             <div className="flex flex-col w-3/4 pl-10 ">

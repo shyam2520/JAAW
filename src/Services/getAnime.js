@@ -1,17 +1,18 @@
 import axios from "axios";
 
 const ANIMEAPIGOGO = axios.create({
-  baseURL: "https://jaaw-api.herokuapp.com/",
+  baseURL: "https://jaaw-api.onrender.com/",
+  // baseURL: "http://127.0.0.1:8000"
 });
 const Anime_Params={
-  character:"",
+  keyword:"",
   page:1,
   limit:30,
-  action:'load_anime_list'
+  action:'search'
 }
 
 async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
-  anime_params['character']=animetitle
+  anime_params['keyword']=animetitle
 
   let api_res = await ANIMEAPIGOGO.get("/anime", {
     params: anime_params,
@@ -21,12 +22,12 @@ async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
   return res;
 }
 
-async function GetEpisode(animetitle, anime_id,page_val=1) {
+async function GetEpisode(animetitle, anime_id,page_val=0) {
   let episode_params={
     movie_id:anime_id,
-    page:page_val,
+    different_page:page_val,
     limit:100,
-    action:'load_list_episode'
+    action:'list_episode'
   }
   let api_res = await ANIMEAPIGOGO.get("/episode", {
     params: episode_params,
@@ -37,8 +38,10 @@ async function GetEpisode(animetitle, anime_id,page_val=1) {
 async function GetTopEpisode(type)
 {
   let top_anime_params={
-    action:'load_top_view_movie',
-    type:type
+    action:'top_view',
+    type_of_view:type,
+    page:1,
+    limit:40,
   }
   let api_res=await ANIMEAPIGOGO.get('/topanime',{params:top_anime_params});
   return api_res;
@@ -47,7 +50,7 @@ async function GetTopEpisode(type)
 async function GetPopularAnime(page=1,limit=25)
 {
   let pop_anime_params={
-    action:'load_popular_ongoing_update',
+    action:'polular_ongoing_update',
     limit:limit,
     page:page
   }

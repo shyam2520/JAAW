@@ -8,7 +8,8 @@ async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
     try {
       let response = await GetAnimeByName(animeName);
-      response = response["data"];
+      console.log("response",response)
+      response = response["data"]["data"];
       response = response
         .sort((a, b) => (a.year < b.year ? 1 : -1))
         .slice(0, 5);

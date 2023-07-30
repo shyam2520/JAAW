@@ -5,18 +5,18 @@ import { AnimeCard } from "./Cards";
 import { CardsPagination } from "./Cards_Pagination";
 import "../../src/App.css";
 const Anime_Params = {
-  character: "",
+  keyword: "",
   page: 1,
   limit: 30,
-  action: "load_anime_list",
+  action: "search",
 };
 async function getanimeData(animeName, animeData, setanimeData) {
   if (animeName) {
     try {
       let response = await GetAnimeByName(animeName, animeData.animeParams);
-      response.data=response.data.sort((a,b) => a.year<b.year?1:-1)
+      response.data.data=response.data.data.sort((a,b) => a.year<b.year?1:-1)
       setanimeData({
-        data: response,
+        data: response.data,
         loading: false,
         animeParams: animeData.animeParams,
       });

@@ -12,7 +12,7 @@ function SuggestionData({ data, navigate }) {
       }
     >
       <div className="rounded-full flex-none w-2/12 overflow-hidden m-3  bg-black  ">
-        <img src={IMAGEPATH + data.image} alt={data.image} className=" object-cover" />
+        <img src={data.image} alt={data.image} className=" object-cover" />
       </div>
       <div className="truncate flex-1  m-3 ">
         <div className={`suggested-title ${data.selected?"text-white":"text-gray-400"} group-hover:text-white`}>

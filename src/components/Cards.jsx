@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const IMAGEPATH = "https://statics.gogoanime.mom/";
  export function MakeCard(data, navigate) {
+  console.log("episode data",data)
   if (!data || !data.length) return <div>No Shows Available</div>;
   let data_ele = data.map((d) => {
     return (
       <div
         key={d.post_title}
+        title ={d.post_title}
         style={{'height':'350px'}}
         className="flex flex-col bg-transparent  cursor-pointer group "
         onClick={() => navigate(`/episodes/${d.post_title}/${d.ID}`,{state:d})}
@@ -16,7 +18,7 @@ const IMAGEPATH = "https://statics.gogoanime.mom/";
           <img
             className="rounded-md h-full w-full z-0 object-fill"
             alt={d.image}
-            src={IMAGEPATH + d.image}
+            src={ d.image}
           />
           <div className="absolute rounded-md top-0 left-0 w-full h-full z-10 group-hover:bg-black opacity-25 "></div>
           <div className="absolute  bottom-0 left-0 px-2 h-6 z-20 font-medium bg-ep-bg rounded-tr-lg rounded-bl-md  text-white ">

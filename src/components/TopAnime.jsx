@@ -14,7 +14,7 @@ function RenderTopAnime({data}) {
   return (
     <ul>
       {data.map((anime, idx) => {
-        let cat = JSON.parse(anime.categories);
+        let cat = (anime.categories);
         if (idx === 0) {
           return (
             <li key={anime.post_title}> 
@@ -28,7 +28,7 @@ function RenderTopAnime({data}) {
                 }
               >
                 <img
-                  src={IMAGEPATH + anime.image}
+                  src={anime.image}
                   alt={anime.image}
                   className="h-full w-full rounded-md object-cover opacity-75"
                 />
@@ -56,8 +56,8 @@ function RenderTopAnime({data}) {
                           />
                         </svg>
                       </div>
-                      <div className=" font-Carousel-text text-gray-300 group-hover:text-white text-sm pl-2">
-                        {anime.view_count}
+                      <div className=" font-Carousel-text text-gray-300 truncate group-hover:text-white text-sm pl-2">
+                        {anime.total_view}
                       </div>
                       <i
                         className={
@@ -83,7 +83,7 @@ function RenderTopAnime({data}) {
                 <img
                   className=" h-full w-full rounded-md"
                   alt={anime.image}
-                  src={IMAGEPATH + anime.image}
+                  src={anime.image}
                 />
               </div>
               <TopAnimeData data={{ ...anime, category: cat }} />
@@ -156,7 +156,7 @@ function TopAnime() {
             settopanimeData: settopanimeData,
           }}
         />
-        <RenderTopAnime data={topanimeData.data} />
+        <RenderTopAnime data={topanimeData.data.data} />
       </div>
     );
   }

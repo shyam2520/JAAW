@@ -6,7 +6,7 @@ async function switchpage(showname, showid, setEpisode,current_page)
   let animedata = await getAnimeDetail(showname, showid);
   let restep = [...response.data];
   restep = restep.sort((a, b) => (a["sort_order"] < b["sort_order"] ? -1 : 1));
-
+  console.log('switch page',response)
   setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
     current_page:response.current_page,animeData: animedata});
 }
@@ -18,10 +18,11 @@ async function getAnimeDetail(showname, id) {
   }
 
 function RangeEpisodes({ data }) {
+    console.log("range episodes ",data)
     let low = 0,high = 100;
     let range_list = [];
-    for (let i = 1; i <= parseInt(data.total_page); i++) {
-      if (i === 1 )
+    for (let i = 0; i <= parseInt(data.total_page); i++) {
+      if (i === 0 )
       {  
         low=(parseInt(data.total_page)-i) * 100;
         range_list.push(
@@ -29,7 +30,7 @@ function RangeEpisodes({ data }) {
           className={`cursor-pointer mr-3 font-Carousel-text ${data.current_page===i?'text-white':'text-ep-text-no-selected'} text-sm `}
           onClick={()=>switchpage(data.animeData.post_title,data.animeData.ID,data.setEpisode,i)} >
             
-            {`${low}-${data.animeData.total_episode_published}`}</div>
+            {`${low}-${data.animeData.total_page}`}</div>
         );
       }
       else
