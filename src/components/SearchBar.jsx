@@ -8,14 +8,12 @@ async function getAnimeData(animeName, setanimeData) {
   if (animeName) {
     try {
       let response = await GetAnimeByName(animeName);
-      console.log("response",response)
       response = response["data"]["data"];
       response = response
         .sort((a, b) => (a.year < b.year ? 1 : -1))
         .slice(0, 5);
       setanimeData({ data: response, isLoading: false });
     } catch (error) {
-      console.log(error);
       setanimeData({ data: {}, isLoading: false });
     }
   }

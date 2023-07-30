@@ -6,7 +6,6 @@ async function switchpage(showname, showid, setEpisode,current_page)
   let animedata = await getAnimeDetail(showname, showid);
   let restep = [...response.data];
   restep = restep.sort((a, b) => (a["sort_order"] < b["sort_order"] ? -1 : 1));
-  console.log('switch page',response)
   setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
     current_page:response.current_page,animeData: animedata});
 }
@@ -18,7 +17,6 @@ async function getAnimeDetail(showname, id) {
   }
 
 function RangeEpisodes({ data }) {
-    console.log("range episodes ",data)
     let low = 0,high = 100;
     let range_list = [];
     for (let i = 0; i <= parseInt(data.total_page); i++) {

@@ -21,7 +21,6 @@ async function getanimeData(animeName, animeData, setanimeData) {
         animeParams: animeData.animeParams,
       });
     } catch (error) {
-      console.log(error);
       setanimeData({
         data: [],
         loading: false,

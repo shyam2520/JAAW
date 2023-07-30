@@ -18,7 +18,6 @@ async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
     params: anime_params,
   });
   let res = api_res["data"]  
-  console.log(res); 
   return res;
 }
 

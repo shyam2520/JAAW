@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const IMAGEPATH = "https://statics.gogoanime.mom/";
  export function MakeCard(data, navigate) {
-  console.log("episode data",data)
   if (!data || !data.length) return <div>No Shows Available</div>;
   let data_ele = data.map((d) => {
     return (

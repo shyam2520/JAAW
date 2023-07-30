@@ -11,7 +11,6 @@ async function getEpisodes(showname, showid, setEpisode, setcurrEpisode,current_
   let response = await GetEpisode(showname, showid,current_page);
   // let animedata = await getAnimeDetail(showname, showid);
   let restep = [...response.data.data];
-  console.log("get Episodes ",response)
   setEpisode({isLoading: false,episodes: restep,total_page: response.total_page,
     current_page:response.current_page,
   });
@@ -32,7 +31,6 @@ function RenderEpisodes({ episodeData, currentEp }) {
   return (
     <div className="grid grid-cols-10 gap-y-2 gap-x-6">
       {episodeData.episodes.map((episode) => {
-        // console.log("episodes ",episode)
         const ep_data = episode
         return (
           <li key={ep_data["id"]}>
@@ -71,7 +69,6 @@ export default function Episodes() {
     getEpisodes(show, id, setEpisode, setcurrEpisode);
     return <div className="loading">Loading ...</div>;
   } else {
-    console.log(currEpisode.currEpisodeSRC)
     return (
       <div className="p-5">
         <div className="flex flex-row font-Carousel-text">

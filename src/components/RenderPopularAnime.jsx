@@ -5,7 +5,6 @@ import { GetPopularAnime } from "../Services/getAnime";
 import {MakeCard} from "./Cards"
 async function getpopanime(setPopAnime) {
   let res = await GetPopularAnime(1, 30);
-  console.log("popular anime",res.data.data.data)
   setPopAnime({ isLoading: false, data: res.data.data.data });
 }
 
