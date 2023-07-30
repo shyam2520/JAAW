@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const IMAGEPATH = "https://statics.gogoanime.mom/";
+// const IMAGEPATH = "https://statics.gogoanime.mom/";
  export function MakeCard(data, navigate) {
   if (!data || !data.length) return <div>No Shows Available</div>;
   let data_ele = data.map((d) => {
