@@ -3,7 +3,6 @@
 
 JAAW is live on  [RENDER](https://jaaw-official.onrender.com/)
 
-JAAW works better on netlify
 
 #### FRONTEND
 - React JS
