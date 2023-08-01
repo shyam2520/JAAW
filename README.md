@@ -1,7 +1,7 @@
 ## JAAW - JUST ANOTHER ANIME WEBSITE
 
 
-JAAW is live on  [netlify](https://project-jaaw.netlify.app/)
+JAAW is live on  [RENDER](https://jaaw-official.onrender.com/)
 
 JAAW works better on netlify
 
