@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
             {d.sub}
           </div>
         </div>
-        <div className="h-1/6 font-Carousel-text whitespace-normal overflow-hidden w-full font-normal text-center text-gray-500 group-hover:text-white mt-2 ">
+        <div className="cardText font-Carousel-text whitespace-normal overflow-hidden w-full font-normal text-center text-gray-500 group-hover:text-white mt-2 ">
           {d.post_title}
         </div>
       </div>

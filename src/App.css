@@ -58,6 +58,14 @@
     animation-delay: 0s;
 }
 
+.cardText{
+  display: -webkit-box;
+  height: auto; 
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
 @keyframes changecolor {
   from {
     transform: scale(0);
