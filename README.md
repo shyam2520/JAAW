@@ -1,7 +1,7 @@
 ## JAAW - JUST ANOTHER ANIME WEBSITE
 
 
-JAAW is live on  [RENDER](https://jaaw-official.onrender.com/)
+JAAW is live on  [RENDER](https://jaaw-official.onrender.com/)( desktop only use an ad blocker😅)
 
 
 #### FRONTEND
