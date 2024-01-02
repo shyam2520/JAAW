@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const ANIMEAPIGOGO = axios.create({
-  // baseURL: "https://jaaw-api.onrender.com/",
-  baseURL: "http://127.0.0.1:8000"
+  baseURL: "https://jaaw-api.onrender.com/",
+  // baseURL: "http://127.0.0.1:8000"
 });
 const Anime_Params={
   keyword:"",
