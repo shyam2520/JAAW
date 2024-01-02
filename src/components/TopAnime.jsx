@@ -4,16 +4,21 @@ import "../../src/App.css";
 import { TopAnimeData } from "./TopAnimeData";
 import { useNavigate } from "react-router-dom";
 const IMAGEPATH = "https://statics.gogoanime.mom/";
-async function GetTopAnime(type, settopanimeData) {
-  let res = await GetTopEpisode(type);
-  settopanimeData({ isLoading: false, duration: type, data: res.data.data });
+// async function GetTopAnime(, settopanimeData) {
+//   let res = await GetTopEpisode(type);
+//   settopanimeData({ isLoading: false, duration: type, data: res.data.data });
+// }
+
+async function GetTopAnime(settopanimeData) {
+  let res = await GetTopEpisode();
+  settopanimeData({ isLoading: false,  data: res.data.results });
 }
 
 function RenderTopAnime({data}) {
   let navigate = useNavigate();
   return (
     <ul>
-      {data.map((anime, idx) => {
+      {data?.gogoPopular.map((anime, idx) => {
         let cat = (anime.categories);
         if (idx === 0) {
           return (
@@ -21,9 +26,9 @@ function RenderTopAnime({data}) {
               <div
                 className={`relative h-40 w-full rounded-md mb-5 group cursor-pointer`}
                 onClick={() =>
-                  navigate(`/episodes/${anime.post_title}/${anime.ID}`, {
-                    replace: true,
-                    state:anime
+                  navigate(`/anime/${anime.id}`, {
+                    // replace: true,
+                    // state:anime
                   })
                 }
               >
@@ -38,7 +43,7 @@ function RenderTopAnime({data}) {
                 >
                   <div className="flex flex-col  ">
                     <div className="  px-2 text-base truncate font-Carousel-text  text-white group-hover:text-white">
-                      {anime.post_title}
+                      {anime.title}
                     </div>
                     <div className="flex flex-row p-2">
                       <div>
@@ -57,9 +62,9 @@ function RenderTopAnime({data}) {
                         </svg>
                       </div>
                       <div className=" font-Carousel-text text-gray-300 truncate group-hover:text-white text-sm pl-2">
-                        {anime.total_view}
+                        {anime.releaseDate}
                       </div>
-                      <i
+                      {/* <i
                         className={
                           "h-2 w-2 rounded-full mt-1.5 ml-2  text-gray-300 group-hover:bg-white "
                         }
@@ -67,7 +72,7 @@ function RenderTopAnime({data}) {
 
                       <div className=" font-Carousel-text  text-gray-300 group-hover:text-white text-sm pl-2">
                         {cat?cat[0].name:""}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -77,7 +82,7 @@ function RenderTopAnime({data}) {
         }
 
         return (
-          <li key={anime.post_title}>
+          <li key={anime.title}>
             <div className="flex flex-row h-20 mb-2 cursor-pointer group">
               <div className=" rounded-md h-full w-3/12 ">
                 <img
@@ -142,21 +147,21 @@ function TopAnimeMenu({ switchanimeData }) {
 function TopAnime() {
   const [topanimeData, settopanimeData] = useState({
     isLoading: true,
-    duration: "day",
+    // duration: "day",
   });
   if (topanimeData.isLoading) {
-    GetTopAnime(topanimeData.duration, settopanimeData);
+    GetTopAnime(settopanimeData);
     return <div className="loading">Loading ...</div>;
   } else {
     return (
       <div className=" px-5 pt-5 pb-2 bg-ep-list rounded-md ">
-        <TopAnimeMenu
+        {/* <TopAnimeMenu
           switchanimeData={{
             ...topanimeData,
             settopanimeData: settopanimeData,
           }}
-        />
-        <RenderTopAnime data={topanimeData.data.data} />
+        /> */}
+        <RenderTopAnime data={topanimeData.data} />
       </div>
     );
   }

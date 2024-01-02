@@ -6,9 +6,11 @@ import { ApolloProvider } from "@apollo/client";
 import { client } from "./ApolloClient/Client";
 import { NavBar } from "./components/NavBar";
 import { TopAnime } from "./components/TopAnime";
+// import { GetAnimeDetails } from "./Services/getAnime";
+import { AnimeDetail } from "./components/AnimeDetail";
 // import { MainHome } from "./components/Home";
 const MainHome = lazy(() => import("./components/Home"));
-const About = lazy (()=> import('./components/About'))
+const About = lazy(() => import('./components/About'))
 const SearchResults = lazy(() => import("./components/Search_Results"));
 const Episodes = lazy(() => import("./components/Episodes"));
 function App() {
@@ -45,20 +47,33 @@ function App() {
                   }
                 />
                 <Route
-                  path={`episodes/:show/:id`}
+                  path={`/:animeName/:id`}
                   element={
                     <Suspense
                       fallback={<div className="loading">Loading ...</div>}
                     >
                       <div className=" flex flex-row ">
                         <div className=" w-8/12 mx-10  ">
-                        <Episodes /> 
+                          <Episodes />
                         </div>
                         <div className="w-1/4"> <TopAnime /> </div>
                       </div>
                     </Suspense>
                   }
                 />
+                <Route
+                  path="anime/:id"
+                  element={
+                    <Suspense
+                      fallback={<div className="loading">Loading ...</div>}
+                    >
+                      <div className=" flex flex-row ">
+                        <div className=" w-8/12 mx-10  ">
+                          <AnimeDetail />
+                        </div>
+                        <div className="w-1/4"> <TopAnime /> </div>
+                      </div>
+                    </Suspense>} />
                 <Route
                   path={`About`}
                   element={

@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 function TopAnimeData({ data }) {
     let navigate=useNavigate();
   return (
-    <div className="flex flex-col w-9/12 pl-2 " onClick={()=>navigate(`/episodes/${data.post_title}/${data.ID}` ,{replace:true,state:data})}>
+    <div className="flex flex-col w-9/12 pl-2 " onClick={()=>navigate(`/anime/${data.id}`)}>
       <div className=" px-2 text-base truncate font-Carousel-text text-gray-400 group-hover:text-white">
-        {data.post_title}
+        {data.title}
       </div>
       <div className="flex flex-row p-2">
         <div>
@@ -24,9 +24,9 @@ function TopAnimeData({ data }) {
           </svg>
         </div>
         <div className=" font-Carousel-text text-gray-500 group-hover:text-white text-sm pl-2">
-          {data.total_view}
+          {data.releaseDate}
         </div>
-        <i
+        {/* <i
           className={
             "h-2 w-2 rounded-full mt-1.5 ml-2  bg-gray-500 group-hover:bg-white "
           }
@@ -34,7 +34,7 @@ function TopAnimeData({ data }) {
 
         <div className=" font-Carousel-text text-gray-500 group-hover:text-white text-sm pl-2">
           {data.type?data.type:""}
-        </div>
+        </div> */}
       </div>
     </div>
   );
