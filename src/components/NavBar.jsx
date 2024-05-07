@@ -10,16 +10,16 @@ export function NavBar() {
         <div className="flex justify-between">
           <div className="flex flex-row m-5">
             <div className="m-2 cursor-pointer">
-              <img
+              {/* <img
                 src="/Users/shyam/DEV/JAAW/src/Assets/logo.svg"
                 alt="anime pahe icon"
                 width={"130px"}
                 height={"120px"}
                 onClick={() => navigate("/")}
-              />
-              {/* <div className="hover:text-indigo-500 cursor-pointer" style={{'color':'white','fontSize':'1.5em'}} onClick={()=>navigate('/')}>
+              /> */}
+              <div className="hover:text-indigo-500 cursor-pointer" style={{'color':'white','fontSize':'1.25em'}} onClick={()=>navigate('/')}>
                 JAAW
-              </div> */}
+              </div>
             </div>
             <div className="relative">
               <SearchBar />
