@@ -11,12 +11,15 @@ export function NavBar() {
           <div className="flex flex-row m-5">
             <div className="m-2 cursor-pointer">
               <img
-                src="https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.svg"
+                src="/Users/shyam/DEV/JAAW/src/Assets/logo.svg"
                 alt="anime pahe icon"
                 width={"130px"}
                 height={"120px"}
                 onClick={() => navigate("/")}
               />
+              {/* <div className="hover:text-indigo-500 cursor-pointer" style={{'color':'white','fontSize':'1.5em'}} onClick={()=>navigate('/')}>
+                JAAW
+              </div> */}
             </div>
             <div className="relative">
               <SearchBar />
@@ -25,7 +28,7 @@ export function NavBar() {
 
           <div className="text-white m-5 font-mono ">
             <ul className="flex space-x-20 m-2 font-Carousel-text font-bold">
-              <li className="hover:text-indigo-500 cursor-pointer " onClick={()=>navigate('/')}> HOME</li>
+              <li className="hover:text-indigo-500 cursor-pointer py-auto " onClick={()=>navigate('/')}> HOME</li>
               <li className="hover:text-indigo-500 cursor-pointer" onClick={()=>navigate('/About',{replace:true})}> ABOUT </li>
             </ul>
           </div>

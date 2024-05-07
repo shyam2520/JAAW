@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../src/App.css";
-import { GetPopularAnime } from "../Services/getAnime";
+import { GetPopularAnime,GetTopEpisode } from "../Services/getAnime";
 let globalPageNo = 1;
 function RenderPopularAnime() {
   const [popAnime, setPopAnime] = useState({isLoading: true,data: [],pageNo: 1});
@@ -20,13 +20,13 @@ function RenderPopularAnime() {
         if(!loadingData){
           setLoadingData(true);
           document.addEventListener('scroll', preventDefault, { passive: false });
-          GetPopularAnime(globalPageNo).then((response) => {
-            globalPageNo = globalPageNo + 1;
+          GetTopEpisode().then((response) => {
+            // globalPageNo = globalPageNo + 1;
             setPopAnime(
               (prevPopAnime) => ({
                 pageNo: prevPopAnime.pageNo + 1,
                 isLoading: false,
-                data: [...prevPopAnime.data, ...response?.data?.results],
+                data:  [...response?.data?.results],
               })
               );
             });
@@ -37,9 +37,10 @@ function RenderPopularAnime() {
   };
   useEffect(() => {
     setPopAnime({ ...popAnime, isLoading: true });
-    globalPageNo=1;
-    GetPopularAnime(globalPageNo).then((response) => {
-      globalPageNo = globalPageNo + 1;
+    // globalPageNo=1;
+    GetTopEpisode().then((response) => {
+      // globalPageNo = globalPageNo + 1;
+      console.log(response)
       setPopAnime({
         isLoading: false,
         data: response?.data?.results,
@@ -47,8 +48,8 @@ function RenderPopularAnime() {
       });
     });
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // window.addEventListener("scroll", handleScroll);
+    // return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   if (popAnime.isLoading) {
     return <div className="loading "> Loading ...</div>;
@@ -63,29 +64,30 @@ function RenderPopularAnime() {
           {popAnime.data.map((d) => {
             return (
               <div
-                key={d.id}
+                key={d.id + d.episodeId}
                 title={d.title}
                 style={{ height: "350px" }}
+                alt ={d.title}
                 className="flex flex-col bg-transparent  cursor-pointer group "
-                // onClick={() => navigate(`/episodes/${d.title}/${d.id}`,{state:d})}
-                onClick={() => {
-                  const inputString = d.id;
-                  const values = inputString.split("-");
+                onClick={() => navigate(`/${d.id}/${d.episodeId}`,{state:d})}
+                // onClick={() => {
+                //   // const inputString = d.id;
+                //   // const values = inputString.split("-");
 
-                  // Find the index of the target value
-                  const targetIndex = values.indexOf("episode");
+                //   // // Find the index of the target value
+                //   // const targetIndex = values.indexOf("episode");
 
-                  // If the target value is not found, return the original string
-                  if (targetIndex === -1) {
-                    return inputString;
-                  }
+                //   // // If the target value is not found, return the original string
+                //   // if (targetIndex === -1) {
+                //   //   return inputString;
+                //   // }
 
-                  // Concatenate values up to the target index using "-"
-                  const resultString = values.slice(0, targetIndex).join("-");
-                  console.log(resultString);
+                //   // // Concatenate values up to the target index using "-"
+                //   // const resultString = values.slice(0, targetIndex).join("-");
+                //   // console.log(resultString);
 
-                  navigate(`/${resultString}/${d.id}`);
-                }}
+                //   // navigate(`/${resultString}/${d.episodeNumber}`);
+                // }}
               >
                 <div className="relative w-full h-5/6 font-Carousel-text  rounded-md">
                   <img
@@ -95,7 +97,7 @@ function RenderPopularAnime() {
                   />
                   <div className="absolute rounded-md top-0 left-0 w-full h-full z-10 group-hover:bg-black opacity-25 "></div>
                   <div className="absolute  bottom-0 left-0 px-2 h-6 z-20 font-medium bg-ep-bg rounded-tr-lg rounded-bl-md  text-white ">
-                    EP {d.episode.split(" ")[1]}
+                    EP {d.episodeNumber}
                   </div>
                   {/* <div className="absolute  top-0 right-0 px-2 h-6 z-20 font-medium   bg-yellow-600 rounded-bl-lg rounded-tr-md  text-white">
                   {d.sub}

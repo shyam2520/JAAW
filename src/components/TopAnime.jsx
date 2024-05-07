@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GetTopEpisode } from "../Services/getAnime";
+import { GetTopEpisode,GetPopularAnime } from "../Services/getAnime";
 import "../../src/App.css";
 import { TopAnimeData } from "./TopAnimeData";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const IMAGEPATH = "https://statics.gogoanime.mom/";
 // }
 
 async function GetTopAnime(settopanimeData) {
-  let res = await GetTopEpisode();
+  let res = await GetPopularAnime();
   settopanimeData({ isLoading: false,  data: res.data.results });
 }
 
@@ -18,7 +18,7 @@ function RenderTopAnime({data}) {
   let navigate = useNavigate();
   return (
     <ul>
-      {data?.gogoPopular.map((anime, idx) => {
+      {data?.map((anime, idx) => {
         let cat = (anime.categories);
         if (idx === 0) {
           return (

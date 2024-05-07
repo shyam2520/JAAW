@@ -17,7 +17,7 @@ function AnimeDetail() {
   useEffect(() => {
     setanimeData({ isLoading: true });
     getAnimeDetail(id).then((response) => {
-      setanimeData({ isLoading: false, data: response?.results });
+      setanimeData({ isLoading: false, data: response });
     });
   }, [id]);
   if (animeData.isLoading) {
@@ -38,11 +38,11 @@ function AnimeDetail() {
             <div className="flex flex-col w-3/4 pl-10 ">
               <div>
                 <h1 className=" font-Carousel-text text-white font-medium text-xl">
-                  {animeData?.data?.name}
+                  {animeData?.data?.title}
                 </h1>
               </div>
               <div className=" mt-5 text-sm text-ep-text-no-selected whitespace-normal font-Carousel-text text-justify">
-                {animeData?.data?.plot_summary}
+                {animeData?.data?.description}
               </div>
             </div>
           </div>
@@ -50,13 +50,13 @@ function AnimeDetail() {
         <div className="rounded-md my-4 px-5 py-4 bg-ep-list grid grid-cols-10 gap-y-2 gap-x-6">
           {animeData?.data?.episodes.map((ep) => {
             return (
-              <li key={ep[1]} style={{'listStyle':'none'}}>
+              <li key={ep.id} style={{'listStyle':'none'}}>
                 <div
                   style={{ color: "#fff", backgroundColor: "#e9005a" }}
                   className={`text-ep-text-no-selected  font-Carousel-text cursor-pointer w-20 h-8  text-center pt-1 rounded-sm `}
-                    onClick={  () =>navigate(`/${id}/${ep[1]}`)        }
+                    onClick={  () =>navigate(`/${id}/${ep.id}`)        }
                 >
-                  {ep[0]}
+                  {ep.number}
                 </div>
               </li>
             );

@@ -12,7 +12,7 @@ function SuggestionData({ data, navigate }) {
       }
     >
       <div key={data?.id} className="rounded-full flex-none w-2/12 overflow-hidden m-3  bg-black  ">
-        <img src={data?.img} alt={data?.img} title={data?.title} className=" object-cover" />
+        <img src={data?.image} alt={data?.image} title={data?.title} className=" object-cover" />
       </div>
       <div className="truncate flex-1  m-3 ">
         <div className={`suggested-title ${data.selected?"text-white":"text-gray-400"} group-hover:text-white`}>
@@ -20,8 +20,8 @@ function SuggestionData({ data, navigate }) {
         </div>
         <div className={`suggested-data-info ${data.selected?"text-white":"text-gray-500"} group-hover:text-white`}>
           <div className=" text-sm ">{data?.releaseDate}</div>
-          {/* <i className={`dropdown-dot ${data.selected?"bg-white":"bg-gray-500"}   group-hover:bg-white`}></i>
-          <div className="text-sm">{data.sub}</div> */}
+          <i className={`dropdown-dot ${data.selected?"bg-white":"bg-gray-500"}   group-hover:bg-white`}></i>
+          <div className="text-sm">{data.subOrDub}</div>
           {/* <i className={`dropdown-dot ${data.selected?"bg-white":"bg-gray-500"} group-hover:bg-white`}></i>
           <div className="text-sm"> EP - {data.total_episode}</div> */}
         </div>

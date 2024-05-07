@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ANIMEAPIGOGO = axios.create({
-  baseURL: "https://jaaw-api.onrender.com/",
+  baseURL: "https://jaaw-flask.onrender.com",
   // baseURL: "http://127.0.0.1:8000"
 });
 const Anime_Params={
@@ -22,10 +22,10 @@ async function GetAnimeByName(animetitle,anime_params=Anime_Params) {
 }
 
 async function GetAnimeDetails(animetitle) {
-  let api_res = await ANIMEAPIGOGO.get("/anime", {
-    params:  {
-      'id':animetitle
-    },
+  let api_res = await ANIMEAPIGOGO.get(`/info/${animetitle}`, {
+    // params:  {
+    //   'id':animetitle
+    // },
   });
   return api_res["data"];
 }
@@ -34,9 +34,7 @@ async function GetEpisode( anime_id) {
   let episode_params={
     movie_id:anime_id
   }
-  let api_res = await ANIMEAPIGOGO.get("/episode", {
-    params: episode_params,
-  });
+  let api_res = await ANIMEAPIGOGO.get(`/watch/${anime_id}`);
   return api_res.data;
 }
 
@@ -48,7 +46,7 @@ async function GetTopEpisode(type)
   //   page:1,
   //   limit:40,
   // }
-  let api_res=await ANIMEAPIGOGO.get('/topanime');
+  let api_res=await ANIMEAPIGOGO.get('/recent');
   return api_res;
 }
 
@@ -59,7 +57,8 @@ async function GetPopularAnime(page=1)
     // limit:limit,
     page:page
   }
-  let api_res=await ANIMEAPIGOGO.get('/recent',{params:pop_anime_params});
+  let api_res=await ANIMEAPIGOGO.get('/popular');
+  console.log(api_res)
   return api_res;
 }
 export {

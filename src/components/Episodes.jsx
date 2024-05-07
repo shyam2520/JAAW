@@ -6,12 +6,11 @@ import { GetAnimeDetails, GetEpisode } from "../Services/getAnime";
 import { RangeEpisodes } from "./RangeEpisodes.jsx";
 import ReactHlsPlayer from "react-hls-player";
 
-const IMAGEPATH = "https://statics.gogoanime.mom/";
 
-async function getEpisodes(showId, movieId) {
-  let response = await GetEpisode(movieId);
+async function getEpisodes(showId, episodeId) {
+  let response = await GetEpisode(episodeId);
   let animedata = await GetAnimeDetails(showId);
-  return { episodes: response, animedata: animedata };
+  return { episodes: animedata.episodes, animedata: animedata ,currentEpisode : response };
 }
 
 // async function getAnimeDetail(showname, id) {
@@ -68,7 +67,7 @@ export default function Episodes() {
           setToggleEpisodes(true);
           response = await getEpisodes(animeName, epId);
           setcurrEpisode({
-            currEpisodeSRC: response?.episodes?.results?.stream?.sources[0]?.file,
+            currEpisodeSRC: response.currentEpisode.sources[0].url,
             episodename: epId != -1 ? epId : id,
           });
           setToggleEpisodes(false);
@@ -76,7 +75,7 @@ export default function Episodes() {
           setEpisode({ isLoading: true });
           response = await getEpisodes(animeName, id);
           setcurrEpisode({
-            currEpisodeSRC: response?.episodes?.results?.stream?.sources[0]?.file,
+            currEpisodeSRC: response.currentEpisode.sources[0].url,
             episodename: epId != -1 ? epId : id,
           });
           setEpisode({ isLoading: false, ...response });
@@ -103,7 +102,7 @@ export default function Episodes() {
           </div>
           <div className=" text-gray-500">&nbsp; &gt; &nbsp;</div>
           <div className=" text-gray-400">
-            {episode?.animedata?.results?.name}
+            {episode?.animedata?.title}
           </div>
         </div>
         <div className="my-5">
@@ -120,18 +119,18 @@ export default function Episodes() {
         <div className=" bg-ep-list py-5 px-5 rounded-md">
           <ul>
             <div className="grid grid-cols-10 gap-y-2 gap-x-2">
-              {episode?.animedata?.results?.episodes.map((ep) => {
+              {episode?.episodes.map((ep) => {
                 return (
-                  <li key={ep[1]}>
+                  <li key={ep?.id}>
                     <div
                       className={` ${
-                        ep[1] === currEpisode["episodename"]
+                        ep.id === currEpisode["episodename"]
                           ? "bg-ep-bg text-white"
                           : " bg-ep-no-selected text-ep-text-no-selected"
                       }  font-Carousel-text cursor-pointer w-20 h-8  text-center pt-1 rounded-sm `}
-                      onClick={() => setEpId(ep[1])}
+                      onClick={() => setEpId(ep.id)}
                     >
-                      {ep[0]}
+                      {ep.number}
                     </div>
                   </li>
                 );
@@ -144,8 +143,8 @@ export default function Episodes() {
           <div className="flex flex-row">
             <div className=" w-1/5 rounded-md  object-fill">
               <img
-                src={episode?.animedata?.results?.image}
-                alt={episode?.animedata?.results?.name}
+                src={episode?.animedata?.image}
+                alt={episode?.animedata?.name}
                 className="w-full h-full rounded-md"
               />
             </div>
@@ -153,11 +152,11 @@ export default function Episodes() {
             <div className="flex flex-col w-3/4 pl-10 ">
               <div>
                 <h1 className=" font-Carousel-text text-white font-medium text-xl">
-                  {episode?.animedata?.results?.name}
+                  {episode?.animedata?.title}
                 </h1>
               </div>
               <div className=" mt-5 text-sm text-ep-text-no-selected whitespace-normal font-Carousel-text text-justify">
-                {episode?.animedata?.results?.plot_summary}
+                {episode?.animedata?.description}
               </div>
             </div>
           </div>
